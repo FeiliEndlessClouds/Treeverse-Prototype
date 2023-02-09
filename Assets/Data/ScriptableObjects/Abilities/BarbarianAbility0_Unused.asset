@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6662418eaa68bf64da973e8b51c3cd98, type: 3}
+  m_Name: BarbarianAbility0_Unused
+  m_EditorClassIdentifier: 
+  ComboEntryList:
+  - Animation: {fileID: 11400000, guid: bc4c31cb2e28b6c47a900c02df80c9b4, type: 2}
+    DamageTime:
+    - 0.38
+    damage: 35
+    coneAngle: 75
+  - Animation: {fileID: 11400000, guid: 4c6741579cea5694da19f0236abc78f7, type: 2}
+    DamageTime:
+    - 0.38
+    damage: 35
+    coneAngle: 75
+  - Animation: {fileID: 11400000, guid: 15f49d4232f044645849edbecf165358, type: 2}
+    DamageTime:
+    - 0.38
+    damage: 35
+    coneAngle: 75
+  SlowDownByOnHit: 0.8
+  SlowDownForOnHit: 0.15
