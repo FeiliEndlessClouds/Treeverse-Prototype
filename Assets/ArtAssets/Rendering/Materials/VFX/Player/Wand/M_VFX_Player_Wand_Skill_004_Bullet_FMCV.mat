@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_VFX_Player_Wand_Skill_004_Bullet_FMCV
+  m_Shader: {fileID: 4800000, guid: d1a7bf81e763bd44a91c3b395d856cf4, type: 3}
+  m_ValidKeywords:
+  - _CLIPTEXUV_MATCAP_ON
+  - _INVERTFRESNEL_ON
+  - _TWISTTEXUSEPOLARUV_ON
+  - _USECUSTOMDATA_ON
+  - _USEVERTEXOFFSET_ON
+  m_InvalidKeywords:
+  - _INVERTGRADIENT_ON
+  - _USEFRESNEL_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ClipTexA:
+        m_Texture: {fileID: 2800000, guid: 64a82c8425a2309409962fa04d1af31f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClipTexB:
+        m_Texture: {fileID: 2800000, guid: 09ea7a6165896d04c9ac8d5c6251f156, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClipTex_B:
+        m_Texture: {fileID: 2800000, guid: 39897c21dd6696b4a8e1dfa4e4e3872d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: cca45d36d03f03647acd3a52422f7de2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex1:
+        m_Texture: {fileID: 2800000, guid: eb61b1ee2ac3ffa41b1650e177e2be18, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 05effdef0317cfc4c80de3972033e091, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MatcapTex:
+        m_Texture: {fileID: 2800000, guid: 6d29be84f8e7e534d92aed51e2b4740c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 2045db86a3660b34d9b2682ba2593fd5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 39897c21dd6696b4a8e1dfa4e4e3872d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwistMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwistTex:
+        m_Texture: {fileID: 2800000, guid: 53b415222112ea94e960e1c7d7e05dc3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: -0.15}
+    - _VertexOffsetTex:
+        m_Texture: {fileID: 2800000, guid: 3620ec5623e91ca42b4e53606d7eadb8, type: 3}
+        m_Scale: {x: 0.8, y: 0.8}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Bias: -0.089
+    - _Brightness: -0.12
+    - _ClipEdgeAddorBlend: 1
+    - _ClipEdgeAddorSolid: 0
+    - _ClipNullAlpha: 0
+    - _ClipStage: 0
+    - _ClipTexARotation: 6.05
+    - _ClipTexA_Rotation: 0
+    - _ClipTexBBlendA: 0
+    - _ClipTexUV_MatCap: 1
+    - _CullMode: 0
+    - _EdgeSmooth: 0
+    - _EdgeSmooth1: 0
+    - _EdgeWidth: 0.195
+    - _EdgeWidth1: 0.181
+    - _Float0: 57.1
+    - _Float1: 0.08
+    - _Float2: 0.2
+    - _FresnalColorAddorSolid: 0
+    - _GradientBlendIntensity: 0.677
+    - _GradientUVOffset: 0
+    - _GradientUorV: 0
+    - _InvertClipTex: 0
+    - _InvertFresnel: 1
+    - _InvertGradient: 1
+    - _InvertMask: 0
+    - _InvertTwistMskTex: 0
+    - _Invert_Mask: 0
+    - _Keyword0: 0
+    - _MaskSmooth: 0.524
+    - _MatCapTexIntensity: 1
+    - _PosterizeStage: 100
+    - _Power: 1.51
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Rotata: 1.8
+    - _Scale: 2.97
+    - _SolidFresnalColor: 0
+    - _TriUVWorldPosition: 0.208
+    - _TwistStage: 0
+    - _TwistTexUsePolarUV: 1
+    - _UseAssignColor: 1
+    - _UseCustomData: 1
+    - _UseFresnel: 1
+    - _UseGradient: 0
+    - _UseOriginColor: 0
+    - _UsePatricleCenterUV: 0
+    - _UseTriplanarSampler: 0
+    - _UseTwistMask: 0
+    - _UseVertexOffset: 1
+    - _VertexOffset: -0.5
+    - _VertexOffsetPushorPull: 0
+    - _VertexOffsetScale: 0.94
+    - _VertexOffsetUseMaskTex: 0
+    - _VertexOffsetUsePositionUV: 0
+    m_Colors:
+    - _BackFaceColor: {r: 1.8558102, g: 1.8558102, b: 1.8558102, a: 1}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorA: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorB: {r: 0.8207547, g: 0.6914209, b: 0.5381363, a: 0}
+    - _ColorC: {r: 0.9622642, g: 0.9125873, b: 0.81247777, a: 0}
+    - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowSpeedClipTwist: {r: 0, g: 0, b: 0.5, a: 0}
+    - _FlowSpeedMainTexVertexOffset: {r: 0, g: 0, b: 0, a: 2}
+    - _FlowSpeedVertexOffsetTex: {r: 0, g: 0, b: 0, a: 0}
+    - _Frescolor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnalColor: {r: 0.254717, g: 0.14218837, b: 0.075694196, a: 1}
+    - _OffsetEx_Offset_R_TileR_TileO: {r: 0, g: 0, b: 2, a: 1}
+    - _TintColor: {r: 10.432951, g: 2.2941568, b: 0.491605, a: 1}
+  m_BuildTextureStacks: []

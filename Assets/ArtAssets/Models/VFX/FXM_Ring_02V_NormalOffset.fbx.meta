@@ -1,0 +1,473 @@
+fileFormatVersion: 2
+guid: 2f0d0f5d162fd58458bea5782d2de966
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: -4421059906858380783
+    second: Spiral.001|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -8620749095152545217
+    second: Spiral.001|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 987721285775965246
+    second: Spiral.001|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 1236804723756088513
+    second: Spiral.001|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: -5697160819304348072
+    second: Spiral.001|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 5494690160863476939
+    second: Spiral.001|RectangleAction
+  - first:
+      74: -2348602008651436277
+    second: Spiral.001|RectangleAction.001
+  - first:
+      74: -1275803234298319226
+    second: Spiral.001|RectangleAction.002
+  - first:
+      74: 4346785683624047001
+    second: Spiral.001|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: -431396299512540594
+    second: Spiral.001|Spiral.001Action
+  - first:
+      74: -4919544064333176337
+    second: Spiral.001|Spiral.003Action
+  - first:
+      74: -5297687141637045690
+    second: Spiral.003|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -239704041292044530
+    second: Spiral.003|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: -2182663560825034858
+    second: Spiral.003|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: -8574778289535299805
+    second: Spiral.003|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: -2362030854751238692
+    second: Spiral.003|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: -3767350880267257144
+    second: Spiral.003|RectangleAction
+  - first:
+      74: 5353063347663938656
+    second: Spiral.003|RectangleAction.001
+  - first:
+      74: 1019957004835236895
+    second: Spiral.003|RectangleAction.002
+  - first:
+      74: 4410498179210287939
+    second: Spiral.003|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 534628025253066119
+    second: Spiral.003|Spiral.001Action
+  - first:
+      74: 1534955340998563052
+    second: Spiral.003|Spiral.003Action
+  - first:
+      74: -6914229220406025590
+    second: Rectangle|Box002.001|Take 001|BaseLayer
+  - first:
+      74: 7415316137703970340
+    second: Rectangle|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 1717718797411833715
+    second: Rectangle|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: -1796806821793539064
+    second: Rectangle|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: -6829572478971060486
+    second: Rectangle|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: -8977993989046710409
+    second: Rectangle|RectangleAction
+  - first:
+      74: -4741365748345478178
+    second: Rectangle|RectangleAction.001
+  - first:
+      74: 7893268092667647580
+    second: Rectangle|RectangleAction.002
+  - first:
+      74: 7156040929812846296
+    second: Rectangle|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: -4134259547419256651
+    second: Rectangle|Spiral.001Action
+  - first:
+      74: 818726579364610681
+    second: Rectangle|Spiral.003Action
+  - first:
+      74: -8572482979168104213
+    second: Rectangle.001|Box002.001|Take 001|BaseLayer
+  - first:
+      74: 760850067595491722
+    second: Rectangle.001|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: -8159929459970072059
+    second: Rectangle.001|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: -7591585185142550819
+    second: Rectangle.001|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: -2119057219696941419
+    second: Rectangle.001|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 8237686031819005543
+    second: Rectangle.001|RectangleAction
+  - first:
+      74: 9223061758874484611
+    second: Rectangle.001|RectangleAction.001
+  - first:
+      74: 6021325352658467935
+    second: Rectangle.001|RectangleAction.002
+  - first:
+      74: 4400607829739685714
+    second: Rectangle.001|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 3367606676032933399
+    second: Rectangle.001|Spiral.001Action
+  - first:
+      74: 5099596773351785697
+    second: Rectangle.001|Spiral.003Action
+  - first:
+      74: 2467069902166289732
+    second: Rectangle.002|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -6644932961169318938
+    second: Rectangle.002|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: -8062353737107096831
+    second: Rectangle.002|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 8529778309580599839
+    second: Rectangle.002|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 1408393716045228439
+    second: Rectangle.002|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 8375722329122493534
+    second: Rectangle.002|RectangleAction
+  - first:
+      74: 4164818023161945068
+    second: Rectangle.002|RectangleAction.001
+  - first:
+      74: 2891712063369613497
+    second: Rectangle.002|RectangleAction.002
+  - first:
+      74: 6250857604432802496
+    second: Rectangle.002|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 6693299970629682993
+    second: Rectangle.002|Spiral.001Action
+  - first:
+      74: 2408354010908705110
+    second: Rectangle.002|Spiral.003Action
+  - first:
+      74: -5572541665780187308
+    second: DeformationSystem.001|Box002.001|Take 001|BaseLayer
+  - first:
+      74: 5119528358344678160
+    second: DeformationSystem.001|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 9036175237013088921
+    second: DeformationSystem.001|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 2872498243913129390
+    second: DeformationSystem.001|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 3176368918492607635
+    second: DeformationSystem.001|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 301430211448645294
+    second: DeformationSystem.001|RectangleAction
+  - first:
+      74: -6252000625232642501
+    second: DeformationSystem.001|RectangleAction.001
+  - first:
+      74: -647335773481951223
+    second: DeformationSystem.001|RectangleAction.002
+  - first:
+      74: -2016749349305323529
+    second: DeformationSystem.001|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 3005899105233887787
+    second: DeformationSystem.001|Spiral.001Action
+  - first:
+      74: -8149846306764954481
+    second: DeformationSystem.001|Spiral.003Action
+  - first:
+      74: 1416919940810650785
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -4189887908506702071
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: -823886026526908308
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: -560613962422369933
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 358669727794590878
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: -6713871693827828644
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|RectangleAction
+  - first:
+      74: -8775146151236516975
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|RectangleAction.001
+  - first:
+      74: 7003724296912348417
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|RectangleAction.002
+  - first:
+      74: 9178698088626805373
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|SK_Enemy_SlimeKing_RightHand|Take
+      001|BaseLayer
+  - first:
+      74: -2751555007844056395
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|Spiral.001Action
+  - first:
+      74: 2157708160665425106
+    second: FXM_Wand_Skill_002_SprialA_FireDown.002|Spiral.003Action
+  - first:
+      74: 521526899867674259
+    second: DeformationSystem.002|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -5163423342317937664
+    second: DeformationSystem.002|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 687190075794803089
+    second: DeformationSystem.002|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 8117749614041064481
+    second: DeformationSystem.002|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: -706064989245813395
+    second: DeformationSystem.002|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: -1076288189990123719
+    second: DeformationSystem.002|RectangleAction
+  - first:
+      74: -8107708026530249330
+    second: DeformationSystem.002|RectangleAction.001
+  - first:
+      74: -7403730933278083677
+    second: DeformationSystem.002|RectangleAction.002
+  - first:
+      74: -4972778122989011827
+    second: DeformationSystem.002|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: -4115946524315274465
+    second: DeformationSystem.002|Spiral.001Action
+  - first:
+      74: 7896014597833488961
+    second: DeformationSystem.002|Spiral.003Action
+  - first:
+      74: -7080302045058238278
+    second: SK_Enemy_SlimeKing_RightHand|Box002.001|Take 001|BaseLayer
+  - first:
+      74: 2094921568428283449
+    second: SK_Enemy_SlimeKing_RightHand|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: -6194307014217898043
+    second: SK_Enemy_SlimeKing_RightHand|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: -3226383681269371891
+    second: SK_Enemy_SlimeKing_RightHand|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 9061861351925582652
+    second: SK_Enemy_SlimeKing_RightHand|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 7925242679326431736
+    second: SK_Enemy_SlimeKing_RightHand|RectangleAction
+  - first:
+      74: -4826866553845973441
+    second: SK_Enemy_SlimeKing_RightHand|RectangleAction.001
+  - first:
+      74: -2245335872300770044
+    second: SK_Enemy_SlimeKing_RightHand|RectangleAction.002
+  - first:
+      74: -8166900910576898702
+    second: SK_Enemy_SlimeKing_RightHand|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 3252025057141975500
+    second: SK_Enemy_SlimeKing_RightHand|Spiral.001Action
+  - first:
+      74: 8226482155560053536
+    second: SK_Enemy_SlimeKing_RightHand|Spiral.003Action
+  - first:
+      74: 2175055298244247874
+    second: FXM_Root|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -5153902632170986860
+    second: FXM_Root|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 1750998602595137575
+    second: FXM_Root|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 3298119096955397003
+    second: FXM_Root|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 8093184949343613615
+    second: FXM_Root|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 8142474482039579771
+    second: FXM_Root|RectangleAction
+  - first:
+      74: -2819656578294670449
+    second: FXM_Root|RectangleAction.001
+  - first:
+      74: 7460584994360649746
+    second: FXM_Root|RectangleAction.002
+  - first:
+      74: 7706739117830425256
+    second: FXM_Root|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: 5000176546207989318
+    second: FXM_Root|Spiral.001Action
+  - first:
+      74: 6003939934032714556
+    second: FXM_Root|Spiral.003Action
+  - first:
+      74: 3239897691608512366
+    second: FXM_Root|VFX_SlimeKing_Skill_001_Punch
+  - first:
+      74: 7028256706154956869
+    second: Box002.001|Box002.001|Take 001|BaseLayer
+  - first:
+      74: -641471346714359402
+    second: Box002.001|DeformationSystem.001|Take 001|BaseLayer
+  - first:
+      74: 3388609304186011040
+    second: Box002.001|DeformationSystem.002|Take 001|BaseLayer
+  - first:
+      74: 6746318150697362158
+    second: Box002.001|DeformationSystem.003|Take 001|BaseLayer
+  - first:
+      74: 3166271812558332529
+    second: Box002.001|FXM_Wand_Skill_002_SprialA_FireDown.002Action
+  - first:
+      74: 7737059279318717969
+    second: Box002.001|RectangleAction
+  - first:
+      74: -5985493929547811208
+    second: Box002.001|RectangleAction.001
+  - first:
+      74: 7012780477665571898
+    second: Box002.001|RectangleAction.002
+  - first:
+      74: 6130095730602867047
+    second: Box002.001|SK_Enemy_SlimeKing_RightHand|Take 001|BaseLayer
+  - first:
+      74: -3095806345379270222
+    second: Box002.001|Spiral.001Action
+  - first:
+      74: -1699807707545746405
+    second: Box002.001|Spiral.003Action
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

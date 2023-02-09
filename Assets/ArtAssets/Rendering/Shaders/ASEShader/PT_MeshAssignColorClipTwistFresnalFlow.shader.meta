@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 59dcae59d73efb142b54557da6f6d524
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _VertexOffsetTex: {fileID: 2800000, guid: 32b83cba70a43a54aa1732ed1bae072e, type: 3}
+  - _MaskTex: {fileID: 2800000, guid: 96e835753a6c55c499ab28a6aa54b2f6, type: 3}
+  - _TwistTex: {fileID: 2800000, guid: 53b415222112ea94e960e1c7d7e05dc3, type: 3}
+  - _TwistMaskTex: {fileID: 2800000, guid: 56d863ff2e2b388429905225071840e3, type: 3}
+  - _ClipTex: {fileID: 2800000, guid: 3313b5d760a88c0499a0a3306d53c25b, type: 3}
+  - _FlowTex: {fileID: 2800000, guid: d1bdf5c656989ac4fb3ac6012c6ea614, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

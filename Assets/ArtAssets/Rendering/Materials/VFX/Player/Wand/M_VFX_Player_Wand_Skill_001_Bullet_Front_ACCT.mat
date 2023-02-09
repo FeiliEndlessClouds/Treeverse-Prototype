@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_VFX_Player_Wand_Skill_001_Bullet_Front_ACCT
+  m_Shader: {fileID: 4800000, guid: ead530f7c8134b242b5e447553da04e0, type: 3}
+  m_ValidKeywords:
+  - _TWISTTEXUSEPOLARUV_ON
+  m_InvalidKeywords:
+  - _INVERTCLIPTEX_ON
+  - _MASKBLENDCLIPTEX_ON
+  - _MASKNULLALPHA_ON
+  - _TWISTCLIPTEX_ON
+  - _USEGRADIENT_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ClipTex:
+        m_Texture: {fileID: 2800000, guid: 3313b5d760a88c0499a0a3306d53c25b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightRamp:
+        m_Texture: {fileID: 2800000, guid: 3194db1153deb8947ad95ca5dbb66cd2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 76d81274b0e0d6041b0fb61d93cac9f2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 90194b14b6434a14a9e0fa41a6e142ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: b4f577ce3169d4f4f8c239c693cef929, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwistMaskTex:
+        m_Texture: {fileID: 2800000, guid: 56d863ff2e2b388429905225071840e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwistTex:
+        m_Texture: {fileID: 2800000, guid: 53b415222112ea94e960e1c7d7e05dc3, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: -0.35, y: 0}
+    - _VertexOffsetTex:
+        m_Texture: {fileID: 2800000, guid: 491eef646266527479879b4bbcf010fd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _BlackClip: 0.656
+    - _Brightness: 0
+    - _ClipEdgeBlendMainTex: 0
+    - _ClipFlowFollowMainTex: 0
+    - _ClipNullAlpha: 0
+    - _ClipStage: 0.713
+    - _ClipTexUsePolarUV: 0
+    - _CullMode: 2
+    - _DataX1: 0
+    - _DataX1_MainTexFlowUorV: 0
+    - _DataX1_MainTexFlowUorV2: 0
+    - _DataX2: 0
+    - _DataX2_UseBrightness: 0
+    - _DataY1BlackCliporBrightness: 0
+    - _DataY1UseBlackClip: 0
+    - _DataY1_CliporBrightness: 0
+    - _DataY2: 0
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DrawOrder: 0
+    - _EdgeSmooth: 0
+    - _EdgeWidth: 0.206
+    - _GradientBlendIntensity: 1
+    - _GradientUVOffset: -0.48
+    - _GradientUorV: 0
+    - _InvertClipTex: 1
+    - _InvertGradient: 0
+    - _InvertMask: 0
+    - _InvertTwistMskTex: 0
+    - _Invert_ClipTex: 0
+    - _Keyword0: 0
+    - _MaskBlendClipTex: 1
+    - _MaskBlendStage: 0.18
+    - _MaskNullAlpha: 1
+    - _MatCapAddIntensity: 0.9
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _TwistClipTex: 1
+    - _TwistStage: 0.2
+    - _TwistTexUsePolarUV: 1
+    - _UseAlpha: 0
+    - _UseAssignColor: 1
+    - _UseCustomData: 0
+    - _UseGradient: 1
+    - _UseOriginColor: 0
+    - _UsePatricleCenterUV: 0
+    - _UseTexColor: 0
+    - _UseTwistMask: 0
+    - _UseVertexOffset: 0
+    - _VertexOffsetPushorPull: 0
+    - _VertexOffsetScale: 1
+    - _VertexOffsetUseMaskTex: 0
+    - _VertexOffsetUsePositionUV: 0
+    - _ZTestMode: 4
+    - _ZWrightMode: 0
+    m_Colors:
+    - _ColorA: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorB: {r: 1, g: 0.8373899, b: 0.3915094, a: 0}
+    - _ColorC: {r: 1, g: 0.36153615, b: 0, a: 0}
+    - _EdgeColor: {r: 0.13207549, g: 0.03800285, b: 0.03800285, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowSpeedClipTwist: {r: 1, g: 0, b: 1.5, a: 0}
+    - _FlowSpeedMainTwistMask: {r: 0, g: 0, b: 0, a: 0}
+    - _FlowSpeedVertexOffsetTex: {r: 0, g: 0, b: 0, a: 0}
+    - _TintColor: {r: 11.984314, g: 6.27451, b: 4.392157, a: 1}
+  m_BuildTextureStacks: []
