@@ -96,21 +96,6 @@ public class Server_CreatureEntity : Server_NetworkedEntity
         Controller.enabled = true;
     }
 
-    public bool DetectSeedAndHitIt(Vector3 pos, float radius, int damage)
-    {
-        int collisionCount = Physics.OverlapSphereNonAlloc(pos, radius, Colliders, DamageLayers);
-        int seedLayer = LayerMask.NameToLayer("Seed");
-        for (int it = 0; it < collisionCount; ++it) {
-            Collider collider = Colliders[it];
-            if (collider.gameObject.layer == seedLayer) {
-                NetworkManager.RuleSetManagerGameOfSeed.SeedTakeDamage(damage);
-                GameContribute(NetworkId, damage, 0, 0, 0, 0);
-                return true;
-            }
-        }
-        return false;
-    }
-    
     public Server_PlayerEntity[] GetPlayersFromCollisionSphere(Vector3 pos, float radius)
     {
 		int collisionCount = Physics.OverlapSphereNonAlloc(pos, radius, Colliders, DamageLayers);
@@ -309,11 +294,6 @@ public class Server_CreatureEntity : Server_NetworkedEntity
                 GameContribute(this.NetworkId, 0, 0, 0, 1, 0);
                 Execution = DieAbility.Cast(this);
 
-                // Drop Seed
-                if (NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() == NetworkId)
-                {
-                    NetworkManager.RuleSetManagerGameOfSeed.DropSeed(this as Server_PlayerEntity);
-                }
                 Execution.OnStart();
             }
             else
@@ -357,12 +337,6 @@ public class Server_CreatureEntity : Server_NetworkedEntity
             {
                 GameContribute(this.NetworkId, 0, 0, 0, 1, 0);
                 Execution = DieAbility.Cast(this);
-
-                // Drop Seed
-                if (NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() == NetworkId)
-                {
-                    NetworkManager.RuleSetManagerGameOfSeed.DropSeed(this as Server_PlayerEntity);
-                }
             }
             else
             {

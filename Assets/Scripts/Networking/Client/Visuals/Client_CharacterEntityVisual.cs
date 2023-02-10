@@ -20,29 +20,6 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
     public float emissiveValue;
     public GameObject throwArrow;
 
-    private void OnEnable()
-    {
-        GameManager_GameOfSeed.OnSeedHolderChange += GameManager_OnSeedHolderChange;
-    }
-
-    private void GameManager_OnSeedHolderChange(int networkID)
-    {
-        if (networkID == Owner.networkId)
-            SetHasSeed(true);
-        else
-            SetHasSeed(false);
-    }
-
-    public AnimatorNodeNamesEnum GetAnimId()
-    {
-        return activeAnimationId;
-    }
-
-    private void OnDisable()
-    {
-        GameManager_GameOfSeed.OnSeedHolderChange -= GameManager_OnSeedHolderChange;
-    }
-
     protected Client_CharacterEntity client_CharacterEntity
     {
         get { return Owner as Client_CharacterEntity; }
@@ -53,46 +30,8 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         base.Initialize();
 
         anim.Play("Idle");
-        GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager.SetJoystickTr(transform.Find("JoystickDir"));
-
-        circleMat = circleR.material;
-
-        circleMat.SetColor("_Color", whichTeamAmI() == SeedersTeamStatus.TEAM_A ? Color.red : Color.cyan);
-        for (int i = 0; i < r.Length; i++)
-        {
-            Material[] tMat = new Material[r[i].materials.Length];
-
-            for (int j = 0; j < r[i].materials.Length; j++)
-            {
-                if (r[i].materials[j].name.Contains("Team"))
-                    tMat[j] = GameInfos.Instance.staticGameData.TeamColors[(int)whichTeamAmI()];
-                else
-                    tMat[j] = r[i].materials[j];
-            }
-            r[i].materials = tMat;
-        }
+        GameInfos.Instance.activeGameManagerMMORPG.playerInputManager.SetJoystickTr(transform.Find("JoystickDir"));
     }
-
-    public SeedersTeamStatus whichTeamAmI()
-    {
-        SeedersTeamStatus team = GameInfos.Instance.activeGameManagerGameOfSeed.GetTeamFromNetworkId(Owner.networkId);
-        return team;
-    }
-
-    public override void Recycle()
-    {
-        base.Recycle();
-    }
-
-    public void SetHasSeed(bool bYes)
-    {
-        if (bHasSeed && !bYes)
-            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.ThrowSeed, 0.3f, true);
-
-        bHasSeed = bYes;
-    }
-    
-    
 
     private void AnimationBasedEvents()
     {
@@ -105,44 +44,16 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         else if (activeAnimationId == AnimatorNodeNamesEnum.Death)
         {
-            GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.BigBoom, transform.position + Vector3.up, Quaternion.identity);
-            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.PlayerDeath, 0.7f, false);
-            GameInfos.Instance.activeGameManagerGameOfSeed.camManager.ShakeCam(0.3f);
-        }
-        else if (activeAnimationId == AnimatorNodeNamesEnum.Celebrate)
-        {
-            if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
-            {
-                GameInfos.Instance.activeGameManagerGameOfSeed.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
-                GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Happy, transform);
-                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetWinMessage(whichTeamAmI());
-                GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Win);
-            }
-        }
-        else if (activeAnimationId == AnimatorNodeNamesEnum.Mourn)
-        {
-            if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
-            {
-                GameInfos.Instance.activeGameManagerGameOfSeed.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
-                GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Lose, transform);
-                SeedersTeamStatus oppositeTeam = whichTeamAmI();
-                if (oppositeTeam == SeedersTeamStatus.TEAM_A) oppositeTeam = SeedersTeamStatus.TEAM_B;
-                else oppositeTeam = SeedersTeamStatus.TEAM_A;
-                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetWinMessage(oppositeTeam);
-                GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Lose);
-            }
-        }
-        else if (activeAnimationId == AnimatorNodeNamesEnum.Mock)
-        {
-            GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Mock, transform);
-            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Taunt);
+            //GameInfos.Instance.activeGameManagerMMORPG.SpawnVFX(VFXEnum.BigBoom, transform.position + Vector3.up, Quaternion.identity);
+            GameInfos.Instance.activeGameManagerMMORPG.audioManager.PlaySound(Sounds.PlayerDeath, 0.7f, false);
+            GameInfos.Instance.activeGameManagerMMORPG.camManager.ShakeCam(0.3f);
         }
 
         if ((int)activeAnimationId > 10 && (int)activeAnimationId < 100)
             PlayTaiwaneseVoice();
 
         // Abilities CD timer, only if I am local player
-        if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
+        if (Owner.networkId == GameInfos.Instance.activeGameManagerMMORPG.localClient_PlayerEntity.networkId)
         {
             int abilityIdx = -1;
             switch (activeAnimationId)
@@ -162,7 +73,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
             }
 
             if (abilityIdx != -1)
-                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetCDTimer(abilityIdx);
+                GameInfos.Instance.activeGameManagerMMORPG.guiManager.SetCDTimer(abilityIdx);
         }
     }
 
@@ -187,7 +98,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         
         if (sound != Sounds.NULL)
-            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(sound);
+            GameInfos.Instance.activeGameManagerMMORPG.audioManager.PlaySound(sound);
     }
 
     private void Update()
@@ -214,8 +125,8 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         
         // ThrowArrow
-        if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
-            throwArrow.SetActive(GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager.pressedTimer > 0.3f);
+        if (Owner.networkId == GameInfos.Instance.activeGameManagerMMORPG.localClient_PlayerEntity.networkId)
+            throwArrow.SetActive(GameInfos.Instance.activeGameManagerMMORPG.playerInputManager.pressedTimer > 0.3f);
         
         animLayerBlender = Mathf.Lerp(animLayerBlender, bHasSeed ? 1f : 0f, Time.deltaTime * 10f);
         anim.SetLayerWeight(1, animLayerBlender);

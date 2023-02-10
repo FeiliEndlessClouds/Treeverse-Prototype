@@ -31,26 +31,12 @@ public class PlayerInputManager : MonoBehaviour
     private void Awake()
     {
         joystickCG.alpha = 0f;
+        camMain = Camera.main;
     }
 
     public void SetJoystickTr(Transform tr)
     {
         joystickDirTr = tr;
-    }
-    
-    private void OnEnable()
-    {
-        GameManager_GameOfSeed.OnGameReady += GameManager_OnGameReady;
-    }
-
-    private void GameManager_OnGameReady(GameManager_GameOfSeed gameManagerGameOfSeed)
-    {
-        camMain = Camera.main;
-    }
-
-    private void OnDisable()
-    {
-        GameManager_GameOfSeed.OnGameReady -= GameManager_OnGameReady;
     }
 
     private void Update()
@@ -139,20 +125,20 @@ public class PlayerInputManager : MonoBehaviour
 
     public void PressedAbility(int whichOne)
     {
-        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
-        int animId = (int)v.GetAnimId();
-        if (animId >= 10 && animId < 100)
-            return;
+        // Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
+        // int animId = (int)v.GetAnimId();
+        // if (animId >= 10 && animId < 100)
+            //return;
 
         abilityInput = (PlayerInputs)(1 << whichOne);
     }
 
     public void SetPlayerInputState(int state)
     {
-        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
-        int animId = (int)v.GetAnimId();
-        if (animId >= 10 && animId < 100)
-            return;
+        // Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
+        // int animId = (int)v.GetAnimId();
+        // if (animId >= 10 && animId < 100)
+        //     return;
 
         abilityInputState = (PlayerInputsStates)state;
     }

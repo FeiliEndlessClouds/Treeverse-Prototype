@@ -1,6 +1,5 @@
 using ENet;
 using System;
-using Networking.Shared.Packets;
 using UnityEngine;
 using System.Collections;
 using System.Linq;
@@ -10,10 +9,6 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 {
     public Peer Peer;
 
-    public SeedGameClassesEnum playerClass = SeedGameClassesEnum.NULL;
-    public SeedersTeamStatus team = SeedersTeamStatus.NULL;
-    public GameplayAbility throwSeedAbility;
-    private float pickedUpTime;
     [Header("Abilities must be assigned in order")]
     public GameplayAbility[] abilityArray;
 
@@ -29,17 +24,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 
     private ByteBuffer ReliableBuffer;
 
-    private effectsEnum[] Inventory = new effectsEnum[10];
-
-    public int Statistics_DamageDealt;
-    public int Statistics_DamageMitigated;
-    public int Statistics_Healed;
-    public int Statistics_Death;
-    public int Statistics_Killed;
-
     public float pressedButtonTimer = 0f;
-
-    public string PlayerName = string.Empty;
 
     public void BeginReliablePacket()
     {
@@ -57,32 +42,8 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         }
     }
 
-    public void SendRuleSetState(Server_RuleSet_GameOfSeed ruleSetManager)
-    {
-        BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToRuleSetData(ref ReliableBuffer, ruleSetManager);
-        EndReliablePacket();
-    }
-
-    public void SendSeedState(Server_PlayerEntity seedHolder, bool bSeedPlanted, int seedLife, int seedGrowth)
-    {
-        BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToSetSeedHolder(ref ReliableBuffer, bSeedPlanted, seedHolder, seedLife, seedGrowth);
-        EndReliablePacket();
-    }
-    
-    public void SendTreeExplode()
-    {
-        BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToTreeExplode(ref ReliableBuffer);
-        EndReliablePacket();
-    }
-
     public override void Initialize()
     {
-        for (int i = 0; i < Inventory.Length; i++)
-            Inventory[i] = effectsEnum.NULL;
-        
         base.Initialize();
 
         BeginReliablePacket();
@@ -114,83 +75,6 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
             bReadInput = false;
             Execution.OnStart();
         }
-    }
-
-    public void AddEffect(effectsEnum effect)
-    {
-        for(int it = 1; it < Inventory.Length; ++it)
-        {
-            if (effect != effectsEnum.NULL && Inventory[it] == effect)
-            {
-                Debug.Log("Effect already in inventory!", gameObject);
-                // Reset Effect?
-                return;
-            }
-
-            if(Inventory[it] == effectsEnum.NULL)
-            {
-                Debug.Log("Effect : " + effect + " added to player " + NetworkId + " inventory");
-                Inventory[it] = effect;
-                NetworkManager.RuleSetManagerGameOfSeed.UseItem(effect, this);
-                OnItemChanged(it, effect);
-
-                return;
-            }
-        }
-
-        Debug.Log("Inventory is full! on player with NetworkID : " + NetworkId);
-    }
-
-    public void RemoveItem(effectsEnum itemEffect)
-    {
-        for (int it = 1; it < Inventory.Length; ++it)
-        {
-            if (Inventory[it] != effectsEnum.NULL && Inventory[it] == itemEffect)
-            {
-                Inventory[it] = effectsEnum.NULL;
-                OnItemChanged(it, effectsEnum.NULL);
-
-                return;
-            }
-        }
-    }
-
-    public void ClearInventory()
-    {
-        for (int i = 0; i < Inventory.Length; i++)
-            Inventory[i] = effectsEnum.NULL;
-    }
-
-    //public void ChangeScene(string sceneName, bool isAdditive, Vector3 position)
-    //{
-    //    BeginReliablePacket();
-    //    ServerChangeScenePacketProcessor.WriteTo(ref ReliableBuffer, sceneName, isAdditive,position);
-    //    EndReliablePacket();
-    //}
-
-    private void OnItemChanged(int slotId, effectsEnum effect)
-    {
-        BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToSetEffect(ref ReliableBuffer, NetworkId, slotId, effect);
-        EndReliablePacket();
-        //FlushBuffers();
-    }
-
-    public void SetClass(SeedGameClassesEnum playerNewClass, GameplayAbility[] classAbilities, CharacterAttributes classAttributes)
-    {
-        playerClass = playerNewClass;
-        int converter = (int)playerNewClass + 1;
-        VisualId = (VisualPrefabName)converter;
-        abilityArray = new GameplayAbility[classAbilities.Length];
-        for (int i = 0; i < abilityArray.Length; i++)
-            abilityArray[i] = classAbilities[i];
-        
-        // Inventory[0] = classItem;
-        // OnItemChanged(0, classItem);
-
-        // SetStats
-        defaultAttributes = classAttributes;
-        ResetAttributes();
     }
 
     public void ResetAttributes()
@@ -236,31 +120,15 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                 if (localInputState == PlayerInputsStates.HOLD) pressedButtonTimer += Time.deltaTime;
                 else if (localInputState == PlayerInputsStates.NULL) pressedButtonTimer = 0f;
 
-                // Pick up Seed --- Pick up Distance hardcoded
-                // if (!NetworkManager.RuleSetManager.bSeedPlanted && NetworkManager.RuleSetManager.IsPlayerAttacker(this) && NetworkManager.RuleSetManager.seedTr != null &&
-                //     NetworkManager.RuleSetManager.GetSeedHolderID() == -1 && inputIdx == 1 &&
-                //     Vector3.Distance(NetworkManager.RuleSetManager.seedTr.position, transform.position) < 2)
-                // {
-                //     NetworkManager.RuleSetManager.SetSeedHolder(this);
-                //     pickedUpTime = Time.time + 1.5f;
-                // }
-                // else
                 if (receivedInputState == PlayerInputsStates.RELEASE)
                 {
-                    // Throw / Plant the seed if SeedHolder
-                    if (NetworkId == NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() && inputIdx == 1 && Time.time > pickedUpTime)
-                    {
-                        NetworkManager.RuleSetManagerGameOfSeed.SeedHolderThrow(this);
-                        //Cast(throwSeedAbility);
-                    }
-                    else if (inputIdx == 5)
+                    if (inputIdx == 5)
                     {
                         CastMock();
                     }
                     else if (inputIdx != 0
                              && abilityArray[inputIdx - 1].manaCost <= mp
-                             && Time.time >= abilityCoolDownArray[inputIdx - 1]
-                             && Time.time > pickedUpTime)
+                             && Time.time >= abilityCoolDownArray[inputIdx - 1])
                     {
                         abilityCoolDownArray[inputIdx - 1] = Time.time + abilityArray[inputIdx - 1].cooldown;
                         Cast(abilityArray[inputIdx - 1]);
@@ -300,13 +168,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
             }
         }
     }
-
-    public void SetSeedHolder()
-    {
-        NetworkManager.RuleSetManagerGameOfSeed.SetSeedHolder(this);
-        pickedUpTime = Time.time + 1.5f;
-    }
-
+    
     private int DumbFlagEnumConverter()
     {
         if ((Inputs & PlayerInputs.Action1) == PlayerInputs.Action1)
@@ -389,14 +251,5 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         {
             bInPlantingArea = false;
         }
-    }
-
-    public void ResetGameContribute()
-    {
-        Statistics_DamageDealt = 0;
-        Statistics_DamageMitigated = 0;
-        Statistics_Healed = 0;
-        Statistics_Death = 0;
-        Statistics_Killed = 0;
     }
 }

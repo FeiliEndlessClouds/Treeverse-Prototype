@@ -7,6 +7,6 @@ public class ClientPlayerSpawnNotifier : MonoBehaviour
 {
     private void Start()
     {
-        GameInfos.Instance.activeGameManagerGameOfSeed.camManager.Init(transform);
+        GameInfos.Instance.activeGameManagerMMORPG.camManager.Init(transform);
     }
 }

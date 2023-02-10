@@ -7,7 +7,6 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
     public float MoveSpeed;
     public int damage = 100;
     public effectsEnum effect = effectsEnum.NULL;
-    public SeedersTeamStatus teamToHit;
 
     public Server_CreatureEntity Owner;
 
@@ -48,42 +47,19 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
                 {
                     ref RaycastHit hit = ref Colliders[it];
 
-                    //if (hit.collider.isTrigger)
-                    //{
-                    //    continue;
-                    //}
-                    
-                    // if (!AnimationSupportData.Target.NetworkManager.RuleSetManager.IsPlayerAttacker(p))
-                    // {
-                    //     AnimationSupportData.Target.DetectSeedAndHitIt(spherePos, Ability.radius, (int)(Ability.damage));
-                    // }
-                    
-                    // Hit seed
-                    if (!bHitSeed && hit.collider.gameObject.layer == LayerMask.NameToLayer("Seed") &&
-                        !Owner.NetworkManager.RuleSetManagerGameOfSeed.IsPlayerAttacker(Owner as Server_PlayerEntity))
-                    {
-                        Owner.NetworkManager.RuleSetManagerGameOfSeed.SeedTakeDamage(damage);
-                        bHitSeed = true;
-                    }
-
                     if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player") && hit.collider.TryGetComponent<Server_PlayerEntity>(out var other) && other != Owner)
                     {
                         transform.position = from + Forward * hit.distance;
 
-                        if (other.team == teamToHit)
+						other.transform.forward = -transform.forward;
+						other.TakeDamage(Owner, damage);
+
+                        if (effect != effectsEnum.NULL)
                         {
-							other.transform.forward = -transform.forward;
-							other.TakeDamage(Owner, damage);
+                            if (effect == effectsEnum.KNOCKBACK)
+                                other.transform.forward = -transform.forward;
 
-                            if (effect != effectsEnum.NULL)
-                            {
-                                if (effect == effectsEnum.KNOCKBACK)
-                                    other.transform.forward = -transform.forward;
-
-                                other.AddEffect(effect);
-                            }
-                            
-                            //OnCollide();
+                            //other.AddEffect(effect);
                         }
 
                         break;
@@ -109,7 +85,7 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
         }
     }
 
-    public static Server_ProjectileEntity Spawn(Server_CreatureEntity owner, VisualPrefabName visualName, float moveSpeed = 20.0f, float range = 10.0f, int damage = 100, effectsEnum effect = effectsEnum.NULL, SeedersTeamStatus teamToHit = SeedersTeamStatus.TEAM_A)
+    public static Server_ProjectileEntity Spawn(Server_CreatureEntity owner, VisualPrefabName visualName, float moveSpeed = 20.0f, float range = 10.0f, int damage = 100, effectsEnum effect = effectsEnum.NULL)
     {
         Vector3 position = owner.transform.position;
         Quaternion rotation = owner.transform.rotation;
@@ -126,14 +102,13 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
         projectileCmp.transform.position = position + new Vector3(0.0f, 1.2f, 0.0f);
         projectileCmp.transform.rotation = rotation;
         if (visualName.ToString().Contains("Arrow"))
-            projectileCmp.VisualId = (teamToHit == SeedersTeamStatus.TEAM_B) ? VisualPrefabName.RedArrowVisual : VisualPrefabName.BlueArrowVisual;
+            projectileCmp.VisualId = VisualPrefabName.RedArrowVisual;
         projectileCmp.transform.position += projectileCmp.transform.forward * 0.5f;
         projectileCmp.Forward = projectileCmp.transform.forward;
         projectileCmp.Lifetime = range / moveSpeed;
         projectileCmp.MoveSpeed = moveSpeed;
         projectileCmp.damage = damage;
         projectileCmp.effect = effect;
-        projectileCmp.teamToHit = teamToHit;
         projectileCmp.bHitSeed = false;
 
         return projectileCmp;

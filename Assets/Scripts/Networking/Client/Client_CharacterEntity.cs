@@ -128,7 +128,7 @@ public class Client_CharacterEntity : Client_NetworkedEntity
     protected override void TimeOutDestroy()
     {
         Debug.Log("Client_NetworkedEntity : " + networkId + " destroyed due to time out.", gameObject);
-        GameInfos.Instance.activeGameManagerGameOfSeed.client_NetworkManager.RemoveCharacterEntity(this);
+        GameInfos.Instance.activeGameManagerMMORPG.client_NetworkManager.RemoveCharacterEntity(this);
         Destroy(gameObject);
     }
 
@@ -139,9 +139,9 @@ public class Client_CharacterEntity : Client_NetworkedEntity
 
     private void OnTakeDamage(int value)
     {
-        GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Hit, transform.position + Vector3.up, Quaternion.identity);
-        GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.PlayerOuch, 0.3f, false);
-        GameInfos.Instance.activeGameManagerGameOfSeed.camManager.ShakeCam(0.2f);
+        //GameInfos.Instance.activeGameManagerMMORPG.SpawnVFX(VFXEnum.Hit, transform.position + Vector3.up, Quaternion.identity);
+        GameInfos.Instance.activeGameManagerMMORPG.audioManager.PlaySound(Sounds.PlayerOuch, 0.3f, false);
+        GameInfos.Instance.activeGameManagerMMORPG.camManager.ShakeCam(0.2f);
         Client_CharacterEntityVisual visualC = Visual as Client_CharacterEntityVisual;
         visualC.emissiveValue = 10f;
 

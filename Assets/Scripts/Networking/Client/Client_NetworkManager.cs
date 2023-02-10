@@ -2,10 +2,7 @@ using DisruptorUnity3d;
 using ENet;
 using System;
 using System.Threading;
-using Networking.Shared.Packets;
-//using ParrelSync;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Event = ENet.Event;
 using EventType = ENet.EventType;
 using System.Collections.Generic;
@@ -169,7 +166,7 @@ public class Client_NetworkManager : MonoBehaviour
 
 		Application.targetFrameRate = 30;
 
-		GameInfos.Instance.activeGameManagerGameOfSeed.client_NetworkManager = this;
+		GameInfos.Instance.activeGameManagerMMORPG.client_NetworkManager = this;
 	}
 
     // SUPABASE stuff
@@ -301,16 +298,12 @@ public class Client_NetworkManager : MonoBehaviour
 						Entities[networkId].networkId = networkId;
 
 						if (networkId == NetworkPlayerId)
-							GameInfos.Instance.activeGameManagerGameOfSeed.LocalClientPlayerInstantiated(Entities[networkId] as Client_PlayerEntity);
+							GameInfos.Instance.activeGameManagerMMORPG.LocalClientPlayerInstantiated(Entities[networkId] as Client_PlayerEntity);
 
 						if ((flags & SnapshotFlags.IsCharacter) == SnapshotFlags.IsCharacter)
 						{
 							characterEntities.Add(entity as Client_CharacterEntity);
-							GameInfos.Instance.activeGameManagerGameOfSeed.ClientPlayerInstantiated(Entities[networkId] as Client_CharacterEntity);
-						}
-						else
-                        {
-							GameInfos.Instance.activeGameManagerGameOfSeed.PropsInstantiated(entity);
+							GameInfos.Instance.activeGameManagerMMORPG.ClientPlayerInstantiated(Entities[networkId] as Client_CharacterEntity);
 						}
 					}
 
@@ -340,55 +333,11 @@ public class Client_NetworkManager : MonoBehaviour
 			    case PacketType.Client_SetPlayerId:
 				    Client_SetPlayerIdPacketProcessor.Process(ref buffer, this);
 				    break;
-			    case PacketType.Client_SetItemAt:
-			    {
-				    Server_RuleSetDataPacketProcessor.ProcessSetEffect(ref buffer);
-			    }
-				    break;
 				case PacketType.Server_RuleSetData:
 				{
 					Server_RuleSetDataPacketProcessor.ProcessRuleSetData(ref buffer, NetworkPlayerId);
 				}
 					break;
-				case PacketType.Client_SetPlayerClass:
-				{
-					Debug.LogWarning("Client should not send Client package to Client");
-				}
-					break;
-				case PacketType.Server_SetPlayerClass:
-				{
-					Server_RuleSetDataPacketProcessor.ProcessSetClass(ref buffer);
-				}
-					break;
-				case PacketType.Server_SetSeedHolder:
-				{
-					Server_RuleSetDataPacketProcessor.ProcessSetSeedHolder(ref buffer);
-				}
-					break;
-			    case PacketType.Server_TreeExplode:
-			    {
-				    Server_RuleSetDataPacketProcessor.ProcessTreeExplode(ref buffer);
-			    }
-				    break;
-                case PacketType.Server_SendMessage:
-                {
-                    GameInfos.Instance.activeGameManagerGameOfSeed.RefreshChatBoard(ref buffer);
-                }
-                    break;
-                //case PacketType.Server_ChangeScene:
-                //   {
-                //    var (item1, item2, vector3) = ServerChangeScenePacketProcessor.Process(ref buffer);
-
-
-                //    SceneManager.LoadSceneAsync(item1, item2 ? LoadSceneMode.Additive : LoadSceneMode
-                //	    .Single).completed += (AsyncOperation op) =>
-                //    {
-                //	    var dungeon = GameObject.Find("Root");
-                //	    dungeon.name = "Dungeon" + vector3;
-                //	    dungeon.transform.position = vector3;
-                //    };
-                //   }
-                //    break;
                 default:
 				    buffer.Clear();
 				    break;

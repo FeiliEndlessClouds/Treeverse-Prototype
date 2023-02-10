@@ -5,7 +5,6 @@ public class GameInfos : Singleton<GameInfos>
 {
 	protected GameInfos() {} // Prevents constructor from being called publicly, can only be singleton.
 
-    [HideInInspector] public GameManager_GameOfSeed activeGameManagerGameOfSeed;
     [HideInInspector] public GameManager_MMORPG activeGameManagerMMORPG;
     [HideInInspector] public StaticGameDatas staticGameData;
     protected override void DoAwake()
@@ -19,6 +18,6 @@ public class GameInfos : Singleton<GameInfos>
 
     public void FlushGameManager()
     {
-        activeGameManagerGameOfSeed = null;
+        activeGameManagerMMORPG = null;
     }
 }

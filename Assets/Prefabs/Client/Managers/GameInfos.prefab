@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c8329e9a3364b54868ca1a37813be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeGameManager: {fileID: 0}
+  activeGameManagerMMORPG: {fileID: 0}
   staticGameData: {fileID: 0}
 --- !u!114 &4990986223061446304
 MonoBehaviour:
@@ -113,28 +113,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5dec73e9ae51f4f449835068fa42ab0e, type: 3}
   - {fileID: 21300000, guid: 5dec73e9ae51f4f449835068fa42ab0e, type: 3}
   - {fileID: 21300000, guid: 4e585248f128d8142ae4c204a15ca27b, type: 3}
-  TeamColors:
-  - {fileID: 2100000, guid: e9d0981f64445a847ad17e35cffa4371, type: 2}
-  - {fileID: 2100000, guid: 910ae73083cd25c458eaef2cca5fdb3a, type: 2}
-  - {fileID: 2100000, guid: fb88547e051d95f4a904bab413574429, type: 2}
+  allVisualPrefabs:
+  - {fileID: 5330390253840536290, guid: 5785dc4eef863c643942ce41d23b99f1, type: 3}
+  - {fileID: 5330390253840536290, guid: a498bb0a7cf53954cbc1b78dc9719384, type: 3}
+  - {fileID: 5330390253840536290, guid: fc2dd0065f2f66b488692a2328cc1438, type: 3}
+  - {fileID: 5330390253840536290, guid: f6cfe1472bdf8c644af2c18058e44064, type: 3}
+  - {fileID: 5330390253840536290, guid: c323c3fbf67373343902df910f306e5a, type: 3}
+  - {fileID: 5330390253840536290, guid: e216a28ac81629a40a4a5526805946c2, type: 3}
+  - {fileID: 5983326963866806639, guid: 6d19c02103128b643a36a892623ca2f8, type: 3}
+  - {fileID: 5330390253840536290, guid: fde55ec8861a3a044bd1bc1ff0a6b80e, type: 3}
+  - {fileID: 5983326963866806639, guid: 6d19c02103128b643a36a892623ca2f8, type: 3}
+  - {fileID: 1182414804077829898, guid: 10e5fd17484789d4d9a9cb85aac54801, type: 3}
+  - {fileID: 1182414804077829898, guid: b7dea2e73e3d90940b2af4ef95994c4e, type: 3}
   abilityCDTimers: []
-  abilitySpritesBar:
-  - {fileID: 21300000, guid: 29fd80552b1ea054989b9490a4c80c9d, type: 3}
-  - {fileID: 21300000, guid: afca26e85e32c474eaca8a82c303cae3, type: 3}
-  - {fileID: 21300000, guid: beb3a2fb760ed244886856124f37bac9, type: 3}
-  - {fileID: 21300000, guid: 9b0c1e3781675ca45a9badef192a68e6, type: 3}
-  abilitySpritesRan:
-  - {fileID: 21300000, guid: 29fd80552b1ea054989b9490a4c80c9d, type: 3}
-  - {fileID: 21300000, guid: dbc09a6e2d002954c8c58160cc00ae66, type: 3}
-  - {fileID: 21300000, guid: dcdc17ab124ce0a47a4ff031ad85fffd, type: 3}
-  - {fileID: 21300000, guid: 95b231cca0ea350488888fe928c7e68e, type: 3}
-  abilitySpritesPal:
-  - {fileID: 21300000, guid: 29fd80552b1ea054989b9490a4c80c9d, type: 3}
-  - {fileID: 21300000, guid: c3afebf5e69d76048965032c87355788, type: 3}
-  - {fileID: 21300000, guid: a9a06be9e7282214a9cbefd952ba45d0, type: 3}
-  - {fileID: 21300000, guid: 4f2c7c30fcaa48f479b8786125e4f5fd, type: 3}
-  abilitySpritesAss:
-  - {fileID: 21300000, guid: 29fd80552b1ea054989b9490a4c80c9d, type: 3}
-  - {fileID: 21300000, guid: 22c2722d2f7c16a4a83b0fe56aa46393, type: 3}
-  - {fileID: 21300000, guid: 042ecb478ec28c04da0495dab3a2218e, type: 3}
-  - {fileID: 21300000, guid: 5ee71f83759f46140952908f4765265c, type: 3}

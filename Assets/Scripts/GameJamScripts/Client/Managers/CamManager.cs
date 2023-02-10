@@ -51,16 +51,9 @@ public class CamManager : MonoBehaviour
         camTr = Camera.main.transform;
     }
 
-    public void SetCamSide(bool bAttack)
-    {
-        camLocatorOrig.localPosition = new Vector3(bAttack ? -sideway : sideway, height, bAttack ? -backward : backward);
-        playerCamRoot.localEulerAngles = Vector3.zero;
-    }
-
     public void Init(Transform player)
     {
         playerTr = player;
-        SetCamSide(true);
     }
 
     public void SetCamState(CamStatesEnum newState)
@@ -109,24 +102,24 @@ public class CamManager : MonoBehaviour
             return destCam;
         }
 
-        float camColRadius = 0.05f;
-        Vector3 toDestVec = destCam - lookAtObjectPos;
-        Ray ray = new Ray(lookAtObjectPos, toDestVec);
-        Vector3 collisionProofedPos = destCam;
-
-        // CAM COLLISION
-        RaycastHit hitInfo;
-        if (Physics.SphereCast(ray, camColRadius, out hitInfo, toDestVec.magnitude, camLayerMask))
-        {
-            if (!bCollidingWithWall)
-                bCollidingWithWall = true;
-
-            collisionProofedPos = hitInfo.point + (camColRadius * hitInfo.normal);
-        }
-        else if (bCollidingWithWall)
-            bCollidingWithWall = false;
-
-        return collisionProofedPos;
+        // float camColRadius = 0.05f;
+        // Vector3 toDestVec = destCam - lookAtObjectPos;
+        // Ray ray = new Ray(lookAtObjectPos, toDestVec);
+        // Vector3 collisionProofedPos = destCam;
+        //
+        // // CAM COLLISION
+        // RaycastHit hitInfo;
+        // if (Physics.SphereCast(ray, camColRadius, out hitInfo, toDestVec.magnitude, camLayerMask))
+        // {
+        //     if (!bCollidingWithWall)
+        //         bCollidingWithWall = true;
+        //
+        //     collisionProofedPos = hitInfo.point + (camColRadius * hitInfo.normal);
+        // }
+        // else if (bCollidingWithWall)
+        //     bCollidingWithWall = false;
+        //
+        // return collisionProofedPos;
 
     }
 

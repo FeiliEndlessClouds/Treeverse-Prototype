@@ -2,9 +2,6 @@ using DisruptorUnity3d;
 using ENet;
 using System;
 using System.Threading;
-using Networking.Server;
-using Networking.Server.Packets;
-using Networking.Shared.Packets;
 using UnityEngine;
 using Event = ENet.Event;
 using EventType = ENet.EventType;
@@ -19,8 +16,6 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 
 	private Thread NetworkThread;
 
-	//[SerializeField] private Server_DungeonManager DungeonManager;
-	public Server_RuleSet_GameOfSeed RuleSetManagerGameOfSeed;
 	public Server_RuleSet_MMORPG RuleSetManagerMMorpg;
 
 	/* Ring buffer is a disruptor queue https://lmax-exchange.github.io/disruptor/disruptor.html */
@@ -166,7 +161,7 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 		};
 
 		NetworkThread.Start();
-		RuleSetManagerGameOfSeed.Initialize(this);
+		RuleSetManagerMMorpg.Initialize(this);
 
 #if UNITY_SERVER
 		Application.targetFrameRate = Mathf.CeilToInt(1.0f / Time.fixedDeltaTime);
@@ -316,24 +311,6 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 			PacketType packetType = buffer.GetPacketType();
 			switch (packetType)
 			{
-				case PacketType.Client_SetPlayerClass:
-					playerEntity.playerClass = (SeedGameClassesEnum)buffer.GetUShort();
-					break;
-				case PacketType.Server_JoinDungeon:
-					Server_JoinDungeonPacketProcessor.Process(ref buffer);
-					break;
-                case PacketType.Client_SendMessage:
-                    SendMessageToClients(buffer.GetUShort(), buffer.GetString());
-                    break;
-                case PacketType.Client_SwitchTeam:
-                    SwitchTeam(buffer.GetUShort());
-                    break;
-                case PacketType.Client_Fight:
-                    Fight();
-                    break;
-                case PacketType.Client_PlayAgain:
-                    PlayAgain();
-                    break;
                 default:
 					buffer.Clear();
 					break;
@@ -393,70 +370,5 @@ public unsafe class Server_NetworkManager : MonoBehaviour
     private void OnApplicationQuit()
 	{
 		bServerRunning = false;
-	}
-
-    public unsafe void SendMessageToClients(int networkID, string message)
-    {
-		string[] formattedMessage = message.Trim().Split(" ");
-		if (formattedMessage.Length == 3 && formattedMessage[0] == "\\cmd" && formattedMessage[1] == "-cn" && !string.IsNullOrWhiteSpace(formattedMessage[2]))
-		{
-			foreach (var p in RuleSetManagerGameOfSeed.playerList)
-			{
-				if (p.NetworkId == networkID)
-				{
-					var name = formattedMessage[2];
-					if (name.Length > 14)
-						p.PlayerName = name.Substring(0, 14);
-					else if (name.Length < 10)
-					{
-						p.PlayerName = name;
-                        for (int i = 0; i < (10 - name.Length); i++)
-						{
-							p.PlayerName += " ";
-                        }
-						p.PlayerName += "\t";
-                    }
-
-					RuleSetManagerGameOfSeed.SendGameState();
-					break;
-				}
-			}
-		}
-		else
-		{
-			for (int i = 0; i < RuleSetManagerGameOfSeed.playerList.Count; i++)
-			{
-				// Begin ReliablePacket
-				ByteBuffer buffer = ByteBuffer.CreateWriter(PacketPool.Allocate());
-
-				// Insert data
-				buffer.Put(PacketType.Server_SendMessage);
-				buffer.Put((ushort)networkID);
-				buffer.Put(message);
-
-				// Send packet.
-				if (!buffer.IsValid)
-					Debug.LogWarning("ReliableBuffer has an empty Data (ByteBuffer.IsValid)");
-				if (buffer.IsFull)
-					Debug.LogError("RuleSetData buffer is full");
-
-				SendReliablePacket(ref buffer, RuleSetManagerGameOfSeed.playerList[i].Peer);
-			}
-		}
-    }
-
-	private void SwitchTeam(int networkID)
-	{
-		RuleSetManagerGameOfSeed.SwitchTeam(networkID);
-    }
-
-    private void Fight()
-    {
-        RuleSetManagerGameOfSeed.Fight();
-    }
-
-	private void PlayAgain()
-	{
-		RuleSetManagerGameOfSeed.PlayAgain();
 	}
 }

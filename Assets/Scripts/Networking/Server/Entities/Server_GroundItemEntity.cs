@@ -4,14 +4,11 @@ public class Server_GroundItemEntity : Server_NetworkedEntity
 {
     public effectsEnum effect;
     public int posIndex;
-    Server_RuleSet_GameOfSeed ruleSet;
 
     public override void Initialize()
     {
         NetworkId = NetworkManager.NetworkedEntities.Allocate(this);
         IsDestroyed = false;
-
-        ruleSet = GameObject.Find("Server_RuleSetManager").GetComponent<Server_RuleSet_GameOfSeed>();
 
         base.Initialize();
     }
@@ -22,9 +19,7 @@ public class Server_GroundItemEntity : Server_NetworkedEntity
         {
             if (other.TryGetComponent<Server_PlayerEntity>(out Server_PlayerEntity player))
             {
-                player.AddEffect(effect);
-
-                ruleSet.SetRespawnGroundItem(posIndex);
+                //player.AddEffect(effect);
 
                 NetworkDestroy();
             }

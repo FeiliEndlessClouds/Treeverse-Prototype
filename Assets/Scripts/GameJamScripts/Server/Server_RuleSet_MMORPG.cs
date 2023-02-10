@@ -5,6 +5,11 @@ using UnityEngine;
 public class Server_RuleSet_MMORPG : MonoBehaviour
 {
     private Server_NetworkManager _serverNetworkManager;
+
+    public void Initialize(Server_NetworkManager nm)
+    {
+        _serverNetworkManager = nm;
+    }
     
     private void OnEnable()
     {

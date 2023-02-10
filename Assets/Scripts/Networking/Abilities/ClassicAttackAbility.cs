@@ -46,23 +46,6 @@ namespace Treeverse.Networking.Abilities
             {
                 AnimationSupportData = new GameplayAnimation.AnimationSupportData() { Target = Self };
                 AnimationSupportData.Target.AnimationTime = 0f;
-
-                Server_PlayerEntity selfPlayer = Self as Server_PlayerEntity;
-				if (Ability.targetTeam == TargetTeam.enemy && selfPlayer.pressedButtonTimer < 0.3f)
-                {
-					Server_PlayerEntity[] dirPivot = AnimationSupportData.Target.GetPlayersFromCollisionSphere(AnimationSupportData.Target.transform.position, Ability.radius * 2);
-                    List<Server_PlayerEntity> targetDirection = new();
-					foreach (var target in dirPivot) 
-                    {
-                        if(target != selfPlayer && target.team != selfPlayer.team) 
-                            targetDirection.Add(target);
-                    }
-                    if(targetDirection.Count > 0 && targetDirection[0] != null) 
-                    {
-						targetDirection = targetDirection.OrderBy(x => Vector3.Distance(selfPlayer.transform.position, x.transform.position)).ToList();
-						selfPlayer.transform.forward = targetDirection[0].transform.position - selfPlayer.transform.position;
-					}
-				}
 			}
 
 			private bool bInterrupt = false;
@@ -103,12 +86,6 @@ namespace Treeverse.Networking.Abilities
 					Vector3 spherePos = AnimationSupportData.Target.transform.position +
                                         AnimationSupportData.Target.transform.forward * Ability.offsetZ;
 
-                    Server_PlayerEntity p = AnimationSupportData.Target as Server_PlayerEntity;
-                    if (!AnimationSupportData.Target.NetworkManager.RuleSetManagerGameOfSeed.IsPlayerAttacker(p))
-                    {
-                        AnimationSupportData.Target.DetectSeedAndHitIt(spherePos, Ability.radius, (int)(Ability.damage));
-                    }
-
                     Server_PlayerEntity selfPlayer = Self as Server_PlayerEntity;
                     Server_PlayerEntity[] detectedPlayers = AnimationSupportData.Target.GetPlayersFromCollisionSphere(spherePos, Ability.radius);
                     List<Server_PlayerEntity> finalTarget = new();
@@ -122,31 +99,7 @@ namespace Treeverse.Networking.Abilities
 							switch (Ability.targetTeam) {
 								case TargetTeam.all: //for testing purpose
 								break;
-
-								case TargetTeam.enemy:
-								if (player != selfPlayer && player.team != selfPlayer.team) {
-									finalTarget.Add(player);
-								}
-								break;
-
-								case TargetTeam.ally:
-								if (player != selfPlayer && player.team == selfPlayer.team) {
-									finalTarget.Add(player);
-								}
-								break;
-
-								case TargetTeam.self:
-								if (player == selfPlayer) {
-									finalTarget.Add(player);
-								}
-								break;
-
-								case TargetTeam.allyAndSelf:
-								if (player.team == selfPlayer.team) {
-									finalTarget.Add(player);
-								}
-								break;
-							}
+                            }
 						}
 
                         if(Ability.targetType == TargetType.Target)
@@ -172,10 +125,10 @@ namespace Treeverse.Networking.Abilities
 				player.transform.forward = -AnimationSupportData.Target.transform.forward;
 				player.TakeDamage(AnimationSupportData.Target, Ability.damage);
 
-                if (Ability.effect != effectsEnum.NULL)
-                {
-                    player.AddEffect(Ability.effect);
-                }
+                // if (Ability.effect != effectsEnum.NULL)
+                // {
+                //     player.AddEffect(Ability.effect);
+                // }
             }
 
             void GenerateGizmo(Vector3 pos) 

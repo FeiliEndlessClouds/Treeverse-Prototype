@@ -11,8 +11,6 @@ public class GUIManager : MonoBehaviour
     public Slider hpSlider;
     public Slider spSlider;
 
-    public Transform inventoryItemsRootTr;
-    private Image[] itemsImgArray;
     public Sprite deathSprite;
 
     public Image[] abilityImg;
@@ -33,11 +31,7 @@ public class GUIManager : MonoBehaviour
     {
         redScreen.enabled = true;
 
-        itemsImgArray = new Image[inventoryItemsRootTr.childCount];
-        for (int i = 0; i < itemsImgArray.Length; i++)
-            itemsImgArray[i] = inventoryItemsRootTr.GetChild(i).GetComponent<Image>();
-
-        StartCoroutine(LogoFadeC());
+        //StartCoroutine(LogoFadeC());
     }
 
     IEnumerator LogoFadeC()
@@ -56,31 +50,7 @@ public class GUIManager : MonoBehaviour
         logoCG.gameObject.SetActive(false);
     }
 
-    public void UpdateIconAtIndex(int idx, Sprite sprite)
-    {
-        //Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(tex.width / 2, tex.height / 2));
-        
-        itemsImgArray[idx].sprite = sprite;
-        itemsImgArray[idx].enabled = true;
-    }
-    
-    public void ClearIconAtIndex(int idx)
-    {
-        itemsImgArray[idx].enabled = false;
-        itemsImgArray[idx].sprite = null;
-    }
-
-    public void ClearInventoryGUI()
-    {
-        for (int i = 1; i < itemsImgArray.Length; i++)
-        {
-            itemsImgArray[i].sprite = null;
-            itemsImgArray[i].enabled = false;
-        }
-        itemsImgArray[0].sprite = deathSprite;
-    }
-
-	public void SetHP(float value)
+    public void SetHP(float value)
     {
 	    hpSlider.value = value;
     }
@@ -88,12 +58,6 @@ public class GUIManager : MonoBehaviour
     public void SetSP(float value)
     {
 	    spSlider.value = value;
-    }
-
-    public void SetAbilityIcons(Sprite[] icons)
-    {
-        for (int i = 0; i < abilityImg.Length; i++)
-            abilityImg[i].sprite = icons[i];
     }
 
     public void SetCDTimer(int whichAbility)
@@ -119,37 +83,5 @@ public class GUIManager : MonoBehaviour
                 abilityCDText[i].text = "0.0";
             }
         }
-    }
-
-    public void SetRoundColor(int whichRound, Color color)
-    {
-        roundWonArray[whichRound].color = color;
-    }
-
-    public void SetRound(int roundNumber)
-    {
-        roundTxt.text = "Round " + roundNumber.ToString();
-    }
-
-    public void SetWinMessage(SeedersTeamStatus whichTeam)
-    {
-        if (whichTeam == SeedersTeamStatus.TEAM_A) winMessage[0].SetActive(true);
-        else if (whichTeam == SeedersTeamStatus.TEAM_B) winMessage[1].SetActive(true);
-        else
-        {
-            winMessage[0].SetActive(false);
-            winMessage[1].SetActive(false);
-        }
-    }
-
-    public void SetEndMatchImage(bool bWon)
-    {
-        EndImage[0].SetActive(false);
-        EndImage[1].SetActive(false);
-
-        if (bWon)
-            EndImage[0].SetActive(true);
-        else
-            EndImage[1].SetActive(true);
     }
 }

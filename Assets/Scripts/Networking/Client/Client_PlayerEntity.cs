@@ -12,19 +12,13 @@ public class Client_PlayerEntity : Client_CharacterEntity
 
     PlayerInputManager playerInputManager;
     private CamManager _camManager;
-    public bool fixedCam = false;
     Camera cam;
-    GameManager_GameOfSeed mgr;
-    [SerializeField] float camDis = -8f, camOffset = -0.2f;
-    [SerializeField] float x = 70, y = -420, z = 250, w = 105;
 
 	private void Start()
     {
-        playerInputManager = GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager;
-        _camManager = GameInfos.Instance.activeGameManagerGameOfSeed.camManager;
+        playerInputManager = GameInfos.Instance.activeGameManagerMMORPG.playerInputManager;
+        _camManager = GameInfos.Instance.activeGameManagerMMORPG.camManager;
         cam = Camera.main;
-        mgr = GameInfos.Instance.activeGameManagerGameOfSeed;
-        //cam.transform.localRotation = new Quaternion(x, y, z, w);
     }
 
     public override void ReadSnapshot(ref SnapshotSerializer serializer, SnapshotFlags flags)
@@ -32,9 +26,9 @@ public class Client_PlayerEntity : Client_CharacterEntity
         base.ReadSnapshot(ref serializer, flags);
 
         if (hp < 120)
-            GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.redScreen.enabled = true;
+            GameInfos.Instance.activeGameManagerMMORPG.guiManager.redScreen.enabled = true;
         else
-            GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.redScreen.enabled = false;
+            GameInfos.Instance.activeGameManagerMMORPG.guiManager.redScreen.enabled = false;
     }
 
     public override void Interpolate(float deltaTime)
@@ -82,22 +76,6 @@ public class Client_PlayerEntity : Client_CharacterEntity
             //}
         }
 
-        if (!fixedCam) 
-        {
-            _camManager.UpdateCam(Time.deltaTime);
-		}
-        else
-        {
-            if (mgr.gameOfSeedState == SeedGameStatesEnum.GAME_A_ATK_B_DFS && mgr.localPlayerTeam == SeedersTeamStatus.TEAM_A ||
-                mgr.gameOfSeedState == SeedGameStatesEnum.GAME_B_ATK_A_DFS && mgr.localPlayerTeam == SeedersTeamStatus.TEAM_B)
-            {
-                cam.transform.localRotation = new Quaternion(z, w, -x, -y);
-            }
-            else
-            {
-                cam.transform.localRotation = new Quaternion(x, y, z, w);    //for testing the angles in view
-            }
-            cam.transform.position = transform.position + cam.transform.forward * camDis + cam.transform.up * camOffset;
-        }
+        _camManager.UpdateCam(Time.deltaTime);
     }
 }

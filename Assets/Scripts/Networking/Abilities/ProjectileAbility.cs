@@ -41,7 +41,7 @@ namespace Treeverse.Networking.Abilities
                     List<Server_PlayerEntity> targetDirection = new();
                     foreach (var target in dirPivot)
                     {
-                        if (target != selfPlayer && target.team != selfPlayer.team)
+                        if (target != selfPlayer)
                             targetDirection.Add(target);
                     }
 
@@ -74,8 +74,7 @@ namespace Treeverse.Networking.Abilities
                         State = 1;
 
                         Server_PlayerEntity player = Self as Server_PlayerEntity;
-                        Server_ProjectileEntity.Spawn(Self, Ability.visualPrefabName, Ability.moveSpeed, Ability.range, Ability.damage, Ability.effect, 
-                            player.team == SeedersTeamStatus.TEAM_A ? SeedersTeamStatus.TEAM_B : SeedersTeamStatus.TEAM_A);
+                        Server_ProjectileEntity.Spawn(Self, Ability.visualPrefabName, Ability.moveSpeed, Ability.range, Ability.damage, Ability.effect);
                     }
    
                     return false;
