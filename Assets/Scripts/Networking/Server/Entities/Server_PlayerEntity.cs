@@ -42,6 +42,13 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         }
     }
 
+    public void SendRuleSetGameState(Server_RuleSet_MMORPG ruleSetManager)
+    {
+        BeginReliablePacket();
+        Server_RuleSetDataPacketProcessor.WriteToRuleSetData(ref ReliableBuffer, ruleSetManager);
+        EndReliablePacket();
+    }
+
     public override void Initialize()
     {
         base.Initialize();

@@ -13,7 +13,6 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
     public Vector3 Forward;
 
     private static RaycastHit[] Colliders = new RaycastHit[16];
-    private bool bHitSeed;
 
     public override void OnDestroy()
     {
@@ -101,15 +100,12 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
         projectileCmp.IsDestroyed = false;
         projectileCmp.transform.position = position + new Vector3(0.0f, 1.2f, 0.0f);
         projectileCmp.transform.rotation = rotation;
-        if (visualName.ToString().Contains("Arrow"))
-            projectileCmp.VisualId = VisualPrefabName.RedArrowVisual;
         projectileCmp.transform.position += projectileCmp.transform.forward * 0.5f;
         projectileCmp.Forward = projectileCmp.transform.forward;
         projectileCmp.Lifetime = range / moveSpeed;
         projectileCmp.MoveSpeed = moveSpeed;
         projectileCmp.damage = damage;
         projectileCmp.effect = effect;
-        projectileCmp.bHitSeed = false;
 
         return projectileCmp;
     }

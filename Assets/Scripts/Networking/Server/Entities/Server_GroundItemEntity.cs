@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Server_GroundItemEntity : Server_NetworkedEntity
 {
-    public effectsEnum effect;
+    public CollectiblesEnum collectibleType;
     public int posIndex;
 
     public override void Initialize()
@@ -26,7 +26,7 @@ public class Server_GroundItemEntity : Server_NetworkedEntity
         }
     }
 
-    public static Server_GroundItemEntity Spawn(Transform parent, Server_NetworkManager networkManager, VisualPrefabName visualId, effectsEnum effect, int index)
+    public static Server_GroundItemEntity Spawn(Transform parent, Server_NetworkManager networkManager, VisualPrefabName visualId, CollectiblesEnum collectibleType, int index)
     {
         GameObject go = new GameObject("Server_GroundItemEntity");
         SphereCollider col = go.AddComponent<SphereCollider>();
@@ -38,7 +38,7 @@ public class Server_GroundItemEntity : Server_NetworkedEntity
 
         groundItemEntity.transform.SetParent(parent, false);
         groundItemEntity.VisualId = visualId;
-        groundItemEntity.effect = effect;
+        groundItemEntity.collectibleType = collectibleType;
 
         groundItemEntity.posIndex = index;
 

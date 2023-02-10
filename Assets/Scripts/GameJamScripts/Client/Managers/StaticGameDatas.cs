@@ -1,7 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+public enum VisualPrefabName
+{
+    PlayerVisual,   // Default Classless visual
+    SmallTree,
+    SmallTreeStump,
+    Ore,
+    OreMined,
+    Fish,
+    Bird,
+    COUNT,
+    NULL = 999
+}
+
+public enum CollectiblesEnum
+{
+    Wood,
+    Ore,
+    Fish,
+    Fertilizer,
+    COUNT,
+    NULL = 999
+}
 
 public enum VFXEnum
 {
