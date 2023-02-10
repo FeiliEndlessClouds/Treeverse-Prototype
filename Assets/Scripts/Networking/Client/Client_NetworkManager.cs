@@ -169,7 +169,7 @@ public class Client_NetworkManager : MonoBehaviour
 
 		Application.targetFrameRate = 30;
 
-		GameInfos.Instance.activeGameManager.client_NetworkManager = this;
+		GameInfos.Instance.activeGameManagerGameOfSeed.client_NetworkManager = this;
 	}
 
     // SUPABASE stuff
@@ -301,16 +301,16 @@ public class Client_NetworkManager : MonoBehaviour
 						Entities[networkId].networkId = networkId;
 
 						if (networkId == NetworkPlayerId)
-							GameInfos.Instance.activeGameManager.LocalClientPlayerInstantiated(Entities[networkId] as Client_PlayerEntity);
+							GameInfos.Instance.activeGameManagerGameOfSeed.LocalClientPlayerInstantiated(Entities[networkId] as Client_PlayerEntity);
 
 						if ((flags & SnapshotFlags.IsCharacter) == SnapshotFlags.IsCharacter)
 						{
 							characterEntities.Add(entity as Client_CharacterEntity);
-							GameInfos.Instance.activeGameManager.ClientPlayerInstantiated(Entities[networkId] as Client_CharacterEntity);
+							GameInfos.Instance.activeGameManagerGameOfSeed.ClientPlayerInstantiated(Entities[networkId] as Client_CharacterEntity);
 						}
 						else
                         {
-							GameInfos.Instance.activeGameManager.PropsInstantiated(entity);
+							GameInfos.Instance.activeGameManagerGameOfSeed.PropsInstantiated(entity);
 						}
 					}
 
@@ -372,7 +372,7 @@ public class Client_NetworkManager : MonoBehaviour
 				    break;
                 case PacketType.Server_SendMessage:
                 {
-                    GameInfos.Instance.activeGameManager.RefreshChatBoard(ref buffer);
+                    GameInfos.Instance.activeGameManagerGameOfSeed.RefreshChatBoard(ref buffer);
                 }
                     break;
                 //case PacketType.Server_ChangeScene:

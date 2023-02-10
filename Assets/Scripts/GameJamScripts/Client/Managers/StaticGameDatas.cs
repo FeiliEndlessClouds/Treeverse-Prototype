@@ -136,7 +136,7 @@ public class StaticGameDatas : MonoBehaviour
         if (whichClass == SeedGameClassesEnum.RANGER) abilitySpriteArray = abilitySpritesRan;
         if (whichClass == SeedGameClassesEnum.PALADIN) abilitySpriteArray = abilitySpritesPal;
         if (whichClass == SeedGameClassesEnum.ASSASSIN) abilitySpriteArray = abilitySpritesAss;
-        GameInfos.Instance.activeGameManager.guiManager.SetAbilityIcons(abilitySpriteArray);
+        GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetAbilityIcons(abilitySpriteArray);
         
         // Timers
         abilityCDTimers = new float[3];

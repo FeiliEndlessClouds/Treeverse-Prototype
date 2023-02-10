@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameOfSeed_UIManager : MonoBehaviour
 {
-    private GameManager gameManager;
+    private GameManager_GameOfSeed _gameManagerGameOfSeed;
 
     public CanvasGroup[] gameOfSeedCGArray = new CanvasGroup[(int)SeedGameStatesEnum.GAME_END];
 
@@ -28,9 +28,9 @@ public class GameOfSeed_UIManager : MonoBehaviour
 
     public TMP_Text resultTxt;
 
-    public void Init(GameManager gm)
+    public void Init(GameManager_GameOfSeed gm)
     {
-        gameManager = gm;
+        _gameManagerGameOfSeed = gm;
         HideAllMenus();
         HideFightBtn();
         AddBtnsListener();
@@ -80,11 +80,11 @@ public class GameOfSeed_UIManager : MonoBehaviour
 
     private void AddBtnsListener()
     {
-        teamSwitch.onClick.AddListener(gameManager.SwitchTeam);
-        fightBtn.onClick.AddListener(gameManager.Fight);
-        playAgainBtn.onClick.AddListener(gameManager.PlayAgain);
-        exitBtn.onClick.AddListener(gameManager.ExitGame);
-        chatInput.onSubmit.AddListener(gameManager.SendChatInputToServer);
+        teamSwitch.onClick.AddListener(_gameManagerGameOfSeed.SwitchTeam);
+        fightBtn.onClick.AddListener(_gameManagerGameOfSeed.Fight);
+        playAgainBtn.onClick.AddListener(_gameManagerGameOfSeed.PlayAgain);
+        exitBtn.onClick.AddListener(_gameManagerGameOfSeed.ExitGame);
+        chatInput.onSubmit.AddListener(_gameManagerGameOfSeed.SendChatInputToServer);
     }
 
     public void HideFightBtn()
@@ -105,8 +105,8 @@ public class GameOfSeed_UIManager : MonoBehaviour
         foreach (var gc in gameContributes)
         {
             string playerName = string.IsNullOrWhiteSpace(gc.PlayerName) ?
-                ((gc.NetworkId == gameManager.localPlayerNetworkID) ? $"*Player{gc.NetworkId}\t" : $"Player{gc.NetworkId}\t") :
-                ((gc.NetworkId == gameManager.localPlayerNetworkID) ? $"*{gc.PlayerName}" : $"{gc.PlayerName}");
+                ((gc.NetworkId == _gameManagerGameOfSeed.localPlayerNetworkID) ? $"*Player{gc.NetworkId}\t" : $"Player{gc.NetworkId}\t") :
+                ((gc.NetworkId == _gameManagerGameOfSeed.localPlayerNetworkID) ? $"*{gc.PlayerName}" : $"{gc.PlayerName}");
             resultTxt.text += $"{playerName}\t{gc.DamageDealt}\t\t{gc.Healed}\t\t{gc.Death}\t\t{gc.Killed}\n";
         }
     }

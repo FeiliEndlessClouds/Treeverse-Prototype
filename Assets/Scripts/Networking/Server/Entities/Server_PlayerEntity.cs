@@ -131,7 +131,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
             {
                 Debug.Log("Effect : " + effect + " added to player " + NetworkId + " inventory");
                 Inventory[it] = effect;
-                NetworkManager.RuleSetManager.UseItem(effect, this);
+                NetworkManager.RuleSetManagerGameOfSeed.UseItem(effect, this);
                 OnItemChanged(it, effect);
 
                 return;
@@ -248,9 +248,9 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                 if (receivedInputState == PlayerInputsStates.RELEASE)
                 {
                     // Throw / Plant the seed if SeedHolder
-                    if (NetworkId == NetworkManager.RuleSetManager.GetSeedHolderNetworkID() && inputIdx == 1 && Time.time > pickedUpTime)
+                    if (NetworkId == NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() && inputIdx == 1 && Time.time > pickedUpTime)
                     {
-                        NetworkManager.RuleSetManager.SeedHolderThrow(this);
+                        NetworkManager.RuleSetManagerGameOfSeed.SeedHolderThrow(this);
                         //Cast(throwSeedAbility);
                     }
                     else if (inputIdx == 5)
@@ -303,7 +303,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 
     public void SetSeedHolder()
     {
-        NetworkManager.RuleSetManager.SetSeedHolder(this);
+        NetworkManager.RuleSetManagerGameOfSeed.SetSeedHolder(this);
         pickedUpTime = Time.time + 1.5f;
     }
 

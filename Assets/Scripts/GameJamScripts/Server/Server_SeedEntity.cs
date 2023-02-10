@@ -55,10 +55,10 @@ public class Server_SeedEntity : Server_NetworkedEntity
         bool bGrowing = true;
         while (bGrowing)
         {
-            if (IsDestroyed || growth >= 100 || NetworkManager.RuleSetManager.gameState == SeedGameStatesEnum.MATCHMAKING)
+            if (IsDestroyed || growth >= 100 || NetworkManager.RuleSetManagerGameOfSeed.gameState == SeedGameStatesEnum.MATCHMAKING)
                 bGrowing = false;
             
-            playersNearby = NetworkManager.RuleSetManager.GetGrowersCount();
+            playersNearby = NetworkManager.RuleSetManagerGameOfSeed.GetGrowersCount();
             growthSpeedMultiplier = (playersNearby == 0) ? 1f : 1f * playersNearby;
             
             yield return null;
@@ -126,7 +126,7 @@ public class Server_SeedEntity : Server_NetworkedEntity
             if (growth < 100)
                 growth += Time.deltaTime * growthSpeedMultiplier * growthMul2;
             else
-                NetworkManager.RuleSetManager.TreeScored();
+                NetworkManager.RuleSetManagerGameOfSeed.TreeScored();
         }
 
         base.OnPositionChanged();
@@ -150,7 +150,7 @@ public class Server_SeedEntity : Server_NetworkedEntity
         {
             // Prevents Client_PlayerEntity from nullref
             Server_PlayerEntity player = other.GetComponent<Server_PlayerEntity>();
-            if (player && NetworkManager.RuleSetManager.IsPlayerAttacker(player))
+            if (player && NetworkManager.RuleSetManagerGameOfSeed.IsPlayerAttacker(player))
                 player.SetSeedHolder();
         }
     }

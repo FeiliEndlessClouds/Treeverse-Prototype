@@ -12,7 +12,7 @@ public class Client_BotEntity : Client_CharacterEntity
 
     private void Start()
     {
-        botCommandManager = GameInfos.Instance.activeGameManager.botCommandManager;
+        botCommandManager = GameInfos.Instance.activeGameManagerGameOfSeed.botCommandManager;
     }
 
     public override void Interpolate(float deltaTime)

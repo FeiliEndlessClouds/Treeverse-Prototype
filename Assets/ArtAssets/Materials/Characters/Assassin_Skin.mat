@@ -21,8 +21,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Assassin_Skin
-  m_Shader: {fileID: 4800000, guid: 9c272431d7173f54bae01582b2c7caed, type: 3}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _GLOSSYREFLECTIONS_OFF
   m_InvalidKeywords:
   - _EMISSIONXALBEDO_ON
   m_LightmapFlags: 4
@@ -136,6 +137,7 @@ Material:
     - _LifeTime: 0
     - _LightThreshold: 0.1
     - _Metallic: 0
+    - _Mode: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 0
     - _OutlineAlbedoBlend: 0.1
@@ -155,6 +157,7 @@ Material:
     - _SrcBlend: 1
     - _SupportAlbedoMapAlpha: 0
     - _Surface: 0
+    - _UVSec: 0
     - _UseHoudiniVAT: 0
     - _WorkflowMode: 1
     - _WrappedLighting: 1

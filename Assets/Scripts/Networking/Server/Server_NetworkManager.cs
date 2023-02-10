@@ -19,9 +19,9 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 
 	private Thread NetworkThread;
 
-	//public bool IsDungeonServer = false;
 	//[SerializeField] private Server_DungeonManager DungeonManager;
-	public Server_RuleSet_GameOfSeed RuleSetManager;
+	public Server_RuleSet_GameOfSeed RuleSetManagerGameOfSeed;
+	public Server_RuleSet_MMORPG RuleSetManagerMMorpg;
 
 	/* Ring buffer is a disruptor queue https://lmax-exchange.github.io/disruptor/disruptor.html */
 	private RingBuffer<Server_Command> NetworkThreadCommands = new RingBuffer<Server_Command> (short.MaxValue);
@@ -166,7 +166,7 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 		};
 
 		NetworkThread.Start();
-		RuleSetManager.Initialize(this);
+		RuleSetManagerGameOfSeed.Initialize(this);
 
 #if UNITY_SERVER
 		Application.targetFrameRate = Mathf.CeilToInt(1.0f / Time.fixedDeltaTime);
@@ -400,7 +400,7 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 		string[] formattedMessage = message.Trim().Split(" ");
 		if (formattedMessage.Length == 3 && formattedMessage[0] == "\\cmd" && formattedMessage[1] == "-cn" && !string.IsNullOrWhiteSpace(formattedMessage[2]))
 		{
-			foreach (var p in RuleSetManager.playerList)
+			foreach (var p in RuleSetManagerGameOfSeed.playerList)
 			{
 				if (p.NetworkId == networkID)
 				{
@@ -417,14 +417,14 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 						p.PlayerName += "\t";
                     }
 
-					RuleSetManager.SendGameState();
+					RuleSetManagerGameOfSeed.SendGameState();
 					break;
 				}
 			}
 		}
 		else
 		{
-			for (int i = 0; i < RuleSetManager.playerList.Count; i++)
+			for (int i = 0; i < RuleSetManagerGameOfSeed.playerList.Count; i++)
 			{
 				// Begin ReliablePacket
 				ByteBuffer buffer = ByteBuffer.CreateWriter(PacketPool.Allocate());
@@ -440,23 +440,23 @@ public unsafe class Server_NetworkManager : MonoBehaviour
 				if (buffer.IsFull)
 					Debug.LogError("RuleSetData buffer is full");
 
-				SendReliablePacket(ref buffer, RuleSetManager.playerList[i].Peer);
+				SendReliablePacket(ref buffer, RuleSetManagerGameOfSeed.playerList[i].Peer);
 			}
 		}
     }
 
 	private void SwitchTeam(int networkID)
 	{
-		RuleSetManager.SwitchTeam(networkID);
+		RuleSetManagerGameOfSeed.SwitchTeam(networkID);
     }
 
     private void Fight()
     {
-        RuleSetManager.Fight();
+        RuleSetManagerGameOfSeed.Fight();
     }
 
 	private void PlayAgain()
 	{
-		RuleSetManager.PlayAgain();
+		RuleSetManagerGameOfSeed.PlayAgain();
 	}
 }

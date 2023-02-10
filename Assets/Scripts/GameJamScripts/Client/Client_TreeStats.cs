@@ -8,13 +8,13 @@ public class Client_TreeStats : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnSeedHolderChange += GameManager_OnSeedHolderChange;
+        GameManager_GameOfSeed.OnSeedHolderChange += GameManager_OnSeedHolderChange;
     }
 
     private void GameManager_OnSeedHolderChange(int networkId)
     {
-        int seedLife = GameInfos.Instance.activeGameManager.seedLife;
-        float growth = GameInfos.Instance.activeGameManager.seedGrowth;
+        int seedLife = GameInfos.Instance.activeGameManagerGameOfSeed.seedLife;
+        float growth = GameInfos.Instance.activeGameManagerGameOfSeed.seedGrowth;
         if (maxLife < seedLife)
             maxLife = seedLife;
         txt.text = seedLife.ToString() + " / " + maxLife.ToString();
@@ -24,6 +24,6 @@ public class Client_TreeStats : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnSeedHolderChange -= GameManager_OnSeedHolderChange;
+        GameManager_GameOfSeed.OnSeedHolderChange -= GameManager_OnSeedHolderChange;
     }
 }

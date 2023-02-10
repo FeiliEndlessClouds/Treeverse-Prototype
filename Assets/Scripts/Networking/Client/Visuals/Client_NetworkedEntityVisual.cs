@@ -10,12 +10,12 @@ public class Client_NetworkedEntityVisual : PoolableGameObject
 
     private void OnDisable()
     {
-        if (GameInfos.Instance == null || GameInfos.Instance.activeGameManager == null || GameInfos.Instance.activeGameManager.audioManager == null)
+        if (GameInfos.Instance == null || GameInfos.Instance.activeGameManagerGameOfSeed == null || GameInfos.Instance.activeGameManagerGameOfSeed.audioManager == null)
             return;
         
         if (vfxToSpawnOnDisable != VFXEnum.NULL)
-            GameInfos.Instance.activeGameManager.SpawnVFX(vfxToSpawnOnDisable, transform.position, Quaternion.identity);
+            GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(vfxToSpawnOnDisable, transform.position, Quaternion.identity);
         if (sfxToSpanwOnDisable != Sounds.NULL)
-            GameInfos.Instance.activeGameManager.audioManager.PlaySound(sfxToSpanwOnDisable, 0.3f);
+            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(sfxToSpanwOnDisable, 0.3f);
     }
 }

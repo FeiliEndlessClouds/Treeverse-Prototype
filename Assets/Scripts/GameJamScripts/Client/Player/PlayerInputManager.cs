@@ -40,17 +40,17 @@ public class PlayerInputManager : MonoBehaviour
     
     private void OnEnable()
     {
-        GameManager.OnGameReady += GameManager_OnGameReady;
+        GameManager_GameOfSeed.OnGameReady += GameManager_OnGameReady;
     }
 
-    private void GameManager_OnGameReady(GameManager gameManager)
+    private void GameManager_OnGameReady(GameManager_GameOfSeed gameManagerGameOfSeed)
     {
         camMain = Camera.main;
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameReady -= GameManager_OnGameReady;
+        GameManager_GameOfSeed.OnGameReady -= GameManager_OnGameReady;
     }
 
     private void Update()
@@ -139,7 +139,7 @@ public class PlayerInputManager : MonoBehaviour
 
     public void PressedAbility(int whichOne)
     {
-        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManager.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
+        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
         int animId = (int)v.GetAnimId();
         if (animId >= 10 && animId < 100)
             return;
@@ -149,7 +149,7 @@ public class PlayerInputManager : MonoBehaviour
 
     public void SetPlayerInputState(int state)
     {
-        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManager.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
+        Client_CharacterEntityVisual v = GameInfos.Instance.activeGameManagerGameOfSeed.localClient_PlayerEntity.Visual as Client_CharacterEntityVisual;
         int animId = (int)v.GetAnimId();
         if (animId >= 10 && animId < 100)
             return;

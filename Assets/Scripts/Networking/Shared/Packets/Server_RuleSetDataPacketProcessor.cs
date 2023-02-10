@@ -69,12 +69,12 @@ public static class Server_RuleSetDataPacketProcessor
         for (int i = 0; i < matchesWonByTeam.Length; i++)
             matchesWonByTeam[i] = (SeedersTeamStatus)buffer.GetByte();
         
-        GameInfos.Instance.activeGameManager.UpdateRuleSetData(seedGameState, playerCount, idArray, playerNameArray, teamStatusArray, round, matchesWonByTeam, gameContributes);
+        GameInfos.Instance.activeGameManagerGameOfSeed.UpdateRuleSetData(seedGameState, playerCount, idArray, playerNameArray, teamStatusArray, round, matchesWonByTeam, gameContributes);
 
         if (isReadyToFight)
-            GameInfos.Instance.activeGameManager.ShowFightBtn();
+            GameInfos.Instance.activeGameManagerGameOfSeed.ShowFightBtn();
         else
-            GameInfos.Instance.activeGameManager.HideFightBtn();
+            GameInfos.Instance.activeGameManagerGameOfSeed.HideFightBtn();
     }
 
     // Set player class
@@ -91,7 +91,7 @@ public static class Server_RuleSetDataPacketProcessor
         int networkId = buffer.GetUShort();
         SeedGameClassesEnum whichClass = (SeedGameClassesEnum)buffer.GetByte();
 
-        GameInfos.Instance.activeGameManager.SetPlayerClass(networkId, whichClass);
+        GameInfos.Instance.activeGameManagerGameOfSeed.SetPlayerClass(networkId, whichClass);
     }
 
     // Set Effect on Player
@@ -109,7 +109,7 @@ public static class Server_RuleSetDataPacketProcessor
         int slotId = buffer.GetUShort();
         effectsEnum effect = (effectsEnum)buffer.GetByte();
 
-        GameInfos.Instance.activeGameManager.SetEffectAt(networkID, slotId, effect);
+        GameInfos.Instance.activeGameManagerGameOfSeed.SetEffectAt(networkID, slotId, effect);
     }
 
     // Set Seed Holder
@@ -132,7 +132,7 @@ public static class Server_RuleSetDataPacketProcessor
 
     public static void ProcessSetSeedHolder(ref ByteBuffer buffer)
     {
-        GameInfos.Instance.activeGameManager.UpdateSeedHolder(buffer.GetShort(), buffer.GetUShort(), buffer.GetUShort());
+        GameInfos.Instance.activeGameManagerGameOfSeed.UpdateSeedHolder(buffer.GetShort(), buffer.GetUShort(), buffer.GetUShort());
     }
     
     public static void WriteToTreeExplode(ref ByteBuffer buffer)
@@ -142,6 +142,6 @@ public static class Server_RuleSetDataPacketProcessor
     
     public static void ProcessTreeExplode(ref ByteBuffer buffer)
     {
-        GameInfos.Instance.activeGameManager.TreeExplode();
+        GameInfos.Instance.activeGameManagerGameOfSeed.TreeExplode();
     }
 }

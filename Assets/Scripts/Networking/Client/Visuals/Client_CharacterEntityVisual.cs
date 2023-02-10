@@ -22,7 +22,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
 
     private void OnEnable()
     {
-        GameManager.OnSeedHolderChange += GameManager_OnSeedHolderChange;
+        GameManager_GameOfSeed.OnSeedHolderChange += GameManager_OnSeedHolderChange;
     }
 
     private void GameManager_OnSeedHolderChange(int networkID)
@@ -40,7 +40,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
 
     private void OnDisable()
     {
-        GameManager.OnSeedHolderChange -= GameManager_OnSeedHolderChange;
+        GameManager_GameOfSeed.OnSeedHolderChange -= GameManager_OnSeedHolderChange;
     }
 
     protected Client_CharacterEntity client_CharacterEntity
@@ -53,7 +53,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         base.Initialize();
 
         anim.Play("Idle");
-        GameInfos.Instance.activeGameManager.playerInputManager.SetJoystickTr(transform.Find("JoystickDir"));
+        GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager.SetJoystickTr(transform.Find("JoystickDir"));
 
         circleMat = circleR.material;
 
@@ -75,7 +75,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
 
     public SeedersTeamStatus whichTeamAmI()
     {
-        SeedersTeamStatus team = GameInfos.Instance.activeGameManager.GetTeamFromNetworkId(Owner.networkId);
+        SeedersTeamStatus team = GameInfos.Instance.activeGameManagerGameOfSeed.GetTeamFromNetworkId(Owner.networkId);
         return team;
     }
 
@@ -87,7 +87,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
     public void SetHasSeed(bool bYes)
     {
         if (bHasSeed && !bYes)
-            GameInfos.Instance.activeGameManager.audioManager.PlaySound(Sounds.ThrowSeed, 0.3f, true);
+            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.ThrowSeed, 0.3f, true);
 
         bHasSeed = bYes;
     }
@@ -105,44 +105,44 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         else if (activeAnimationId == AnimatorNodeNamesEnum.Death)
         {
-            GameInfos.Instance.activeGameManager.SpawnVFX(VFXEnum.BigBoom, transform.position + Vector3.up, Quaternion.identity);
-            GameInfos.Instance.activeGameManager.audioManager.PlaySound(Sounds.PlayerDeath, 0.7f, false);
-            GameInfos.Instance.activeGameManager.camManager.ShakeCam(0.3f);
+            GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.BigBoom, transform.position + Vector3.up, Quaternion.identity);
+            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.PlayerDeath, 0.7f, false);
+            GameInfos.Instance.activeGameManagerGameOfSeed.camManager.ShakeCam(0.3f);
         }
         else if (activeAnimationId == AnimatorNodeNamesEnum.Celebrate)
         {
-            if (Owner.networkId == GameInfos.Instance.activeGameManager.localPlayerNetworkID)
+            if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
             {
-                GameInfos.Instance.activeGameManager.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
-                GameInfos.Instance.activeGameManager.SpawnVFX(VFXEnum.Emoji_Happy, transform);
-                GameInfos.Instance.activeGameManager.guiManager.SetWinMessage(whichTeamAmI());
-                GameInfos.Instance.activeGameManager.audioManager.PlaySound(Sounds.Win);
+                GameInfos.Instance.activeGameManagerGameOfSeed.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
+                GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Happy, transform);
+                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetWinMessage(whichTeamAmI());
+                GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Win);
             }
         }
         else if (activeAnimationId == AnimatorNodeNamesEnum.Mourn)
         {
-            if (Owner.networkId == GameInfos.Instance.activeGameManager.localPlayerNetworkID)
+            if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
             {
-                GameInfos.Instance.activeGameManager.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
-                GameInfos.Instance.activeGameManager.SpawnVFX(VFXEnum.Emoji_Lose, transform);
+                GameInfos.Instance.activeGameManagerGameOfSeed.camManager.SetCamState(CamStatesEnum.LOOKATLOCALPLAYER);
+                GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Lose, transform);
                 SeedersTeamStatus oppositeTeam = whichTeamAmI();
                 if (oppositeTeam == SeedersTeamStatus.TEAM_A) oppositeTeam = SeedersTeamStatus.TEAM_B;
                 else oppositeTeam = SeedersTeamStatus.TEAM_A;
-                GameInfos.Instance.activeGameManager.guiManager.SetWinMessage(oppositeTeam);
-                GameInfos.Instance.activeGameManager.audioManager.PlaySound(Sounds.Lose);
+                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetWinMessage(oppositeTeam);
+                GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Lose);
             }
         }
         else if (activeAnimationId == AnimatorNodeNamesEnum.Mock)
         {
-            GameInfos.Instance.activeGameManager.SpawnVFX(VFXEnum.Emoji_Mock, transform);
-            GameInfos.Instance.activeGameManager.audioManager.PlaySound(Sounds.Taunt);
+            GameInfos.Instance.activeGameManagerGameOfSeed.SpawnVFX(VFXEnum.Emoji_Mock, transform);
+            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(Sounds.Taunt);
         }
 
         if ((int)activeAnimationId > 10 && (int)activeAnimationId < 100)
             PlayTaiwaneseVoice();
 
         // Abilities CD timer, only if I am local player
-        if (Owner.networkId == GameInfos.Instance.activeGameManager.localPlayerNetworkID)
+        if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
         {
             int abilityIdx = -1;
             switch (activeAnimationId)
@@ -162,7 +162,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
             }
 
             if (abilityIdx != -1)
-                GameInfos.Instance.activeGameManager.guiManager.SetCDTimer(abilityIdx);
+                GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.SetCDTimer(abilityIdx);
         }
     }
 
@@ -187,7 +187,7 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         
         if (sound != Sounds.NULL)
-            GameInfos.Instance.activeGameManager.audioManager.PlaySound(sound);
+            GameInfos.Instance.activeGameManagerGameOfSeed.audioManager.PlaySound(sound);
     }
 
     private void Update()
@@ -214,8 +214,8 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
         }
         
         // ThrowArrow
-        if (Owner.networkId == GameInfos.Instance.activeGameManager.localPlayerNetworkID)
-            throwArrow.SetActive(GameInfos.Instance.activeGameManager.playerInputManager.pressedTimer > 0.3f);
+        if (Owner.networkId == GameInfos.Instance.activeGameManagerGameOfSeed.localPlayerNetworkID)
+            throwArrow.SetActive(GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager.pressedTimer > 0.3f);
         
         animLayerBlender = Mathf.Lerp(animLayerBlender, bHasSeed ? 1f : 0f, Time.deltaTime * 10f);
         anim.SetLayerWeight(1, animLayerBlender);

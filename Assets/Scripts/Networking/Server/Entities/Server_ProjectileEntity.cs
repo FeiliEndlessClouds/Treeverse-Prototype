@@ -60,9 +60,9 @@ public class Server_ProjectileEntity : Server_NetworkedEntity
                     
                     // Hit seed
                     if (!bHitSeed && hit.collider.gameObject.layer == LayerMask.NameToLayer("Seed") &&
-                        !Owner.NetworkManager.RuleSetManager.IsPlayerAttacker(Owner as Server_PlayerEntity))
+                        !Owner.NetworkManager.RuleSetManagerGameOfSeed.IsPlayerAttacker(Owner as Server_PlayerEntity))
                     {
-                        Owner.NetworkManager.RuleSetManager.SeedTakeDamage(damage);
+                        Owner.NetworkManager.RuleSetManagerGameOfSeed.SeedTakeDamage(damage);
                         bHitSeed = true;
                     }
 

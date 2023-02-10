@@ -149,15 +149,15 @@ public class Client_NetworkedEntity : MonoBehaviour, IEquatable<Client_Networked
         if ((int)VisualRef >= (int)VisualPrefabName.COUNT)
             Debug.LogError("You're trying to load a Visual Prefab that doesn't exist : " + VisualRef.ToString());
 
-        Transform goTr = ObjectPoolManager.CreatePooled(GameInfos.Instance.activeGameManager.allVisualPrefabs[(int)VisualRef], transform.position, transform.rotation).transform;
+        Transform goTr = ObjectPoolManager.CreatePooled(GameInfos.Instance.activeGameManagerGameOfSeed.allVisualPrefabs[(int)VisualRef], transform.position, transform.rotation).transform;
         goTr.SetParent(transform);
         Visual = goTr.GetComponent<Client_NetworkedEntityVisual>();
         Visual.Owner = this;
 
         if (VisualRef == VisualPrefabName.TreeMorphableVisual)
-            GameInfos.Instance.activeGameManager.seedSkinnedMeshR = Visual.GetComponent<SkinnedMeshRenderer>();
+            GameInfos.Instance.activeGameManagerGameOfSeed.seedSkinnedMeshR = Visual.GetComponent<SkinnedMeshRenderer>();
         else if (VisualRef == VisualPrefabName.SeedVisual)
-            GameInfos.Instance.activeGameManager.seedSkinnedMeshR = null;
+            GameInfos.Instance.activeGameManagerGameOfSeed.seedSkinnedMeshR = null;
     }
 
     void Update()

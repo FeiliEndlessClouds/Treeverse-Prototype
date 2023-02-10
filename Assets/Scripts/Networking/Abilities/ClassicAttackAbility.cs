@@ -104,7 +104,7 @@ namespace Treeverse.Networking.Abilities
                                         AnimationSupportData.Target.transform.forward * Ability.offsetZ;
 
                     Server_PlayerEntity p = AnimationSupportData.Target as Server_PlayerEntity;
-                    if (!AnimationSupportData.Target.NetworkManager.RuleSetManager.IsPlayerAttacker(p))
+                    if (!AnimationSupportData.Target.NetworkManager.RuleSetManagerGameOfSeed.IsPlayerAttacker(p))
                     {
                         AnimationSupportData.Target.DetectSeedAndHitIt(spherePos, Ability.radius, (int)(Ability.damage));
                     }

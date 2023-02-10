@@ -103,7 +103,7 @@ public class Server_CreatureEntity : Server_NetworkedEntity
         for (int it = 0; it < collisionCount; ++it) {
             Collider collider = Colliders[it];
             if (collider.gameObject.layer == seedLayer) {
-                NetworkManager.RuleSetManager.SeedTakeDamage(damage);
+                NetworkManager.RuleSetManagerGameOfSeed.SeedTakeDamage(damage);
                 GameContribute(NetworkId, damage, 0, 0, 0, 0);
                 return true;
             }
@@ -310,9 +310,9 @@ public class Server_CreatureEntity : Server_NetworkedEntity
                 Execution = DieAbility.Cast(this);
 
                 // Drop Seed
-                if (NetworkManager.RuleSetManager.GetSeedHolderNetworkID() == NetworkId)
+                if (NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() == NetworkId)
                 {
-                    NetworkManager.RuleSetManager.DropSeed(this as Server_PlayerEntity);
+                    NetworkManager.RuleSetManagerGameOfSeed.DropSeed(this as Server_PlayerEntity);
                 }
                 Execution.OnStart();
             }
@@ -359,9 +359,9 @@ public class Server_CreatureEntity : Server_NetworkedEntity
                 Execution = DieAbility.Cast(this);
 
                 // Drop Seed
-                if (NetworkManager.RuleSetManager.GetSeedHolderNetworkID() == NetworkId)
+                if (NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() == NetworkId)
                 {
-                    NetworkManager.RuleSetManager.DropSeed(this as Server_PlayerEntity);
+                    NetworkManager.RuleSetManagerGameOfSeed.DropSeed(this as Server_PlayerEntity);
                 }
             }
             else

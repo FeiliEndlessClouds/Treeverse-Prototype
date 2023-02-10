@@ -14,16 +14,16 @@ public class Client_PlayerEntity : Client_CharacterEntity
     private CamManager _camManager;
     public bool fixedCam = false;
     Camera cam;
-    GameManager mgr;
+    GameManager_GameOfSeed mgr;
     [SerializeField] float camDis = -8f, camOffset = -0.2f;
     [SerializeField] float x = 70, y = -420, z = 250, w = 105;
 
 	private void Start()
     {
-        playerInputManager = GameInfos.Instance.activeGameManager.playerInputManager;
-        _camManager = GameInfos.Instance.activeGameManager.camManager;
+        playerInputManager = GameInfos.Instance.activeGameManagerGameOfSeed.playerInputManager;
+        _camManager = GameInfos.Instance.activeGameManagerGameOfSeed.camManager;
         cam = Camera.main;
-        mgr = GameInfos.Instance.activeGameManager;
+        mgr = GameInfos.Instance.activeGameManagerGameOfSeed;
         //cam.transform.localRotation = new Quaternion(x, y, z, w);
     }
 
@@ -32,9 +32,9 @@ public class Client_PlayerEntity : Client_CharacterEntity
         base.ReadSnapshot(ref serializer, flags);
 
         if (hp < 120)
-            GameInfos.Instance.activeGameManager.guiManager.redScreen.enabled = true;
+            GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.redScreen.enabled = true;
         else
-            GameInfos.Instance.activeGameManager.guiManager.redScreen.enabled = false;
+            GameInfos.Instance.activeGameManagerGameOfSeed.guiManager.redScreen.enabled = false;
     }
 
     public override void Interpolate(float deltaTime)

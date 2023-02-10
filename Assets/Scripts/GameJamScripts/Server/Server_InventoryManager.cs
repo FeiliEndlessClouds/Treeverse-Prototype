@@ -268,8 +268,8 @@ public class Server_InventoryManager
     // Switch the seed carrying state from TRUE to FALSE, and the seed drops down to the ground
     public IEnumerator SEEDDROP(Server_PlayerEntity player)
     {
-        if (player.NetworkManager.RuleSetManager.GetSeedHolderNetworkID() == player.NetworkId)
-            player.NetworkManager.RuleSetManager.DropSeed(player);
+        if (player.NetworkManager.RuleSetManagerGameOfSeed.GetSeedHolderNetworkID() == player.NetworkId)
+            player.NetworkManager.RuleSetManagerGameOfSeed.DropSeed(player);
         
         yield return null;
         player.RemoveItem(effectsEnum.SEEDDROP);
