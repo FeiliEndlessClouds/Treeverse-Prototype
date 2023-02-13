@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEditor.Search;
@@ -42,7 +43,7 @@ public class Server_ActorSpawner
                     Quaternion.identity).GetComponent<Server_ActorEntity>();
                 actor.NetworkManager = ruleSetManager.serverNetworkManager;
                 actor.actorType = (ActorTypesEnum)i;
-                actor.VisualId = GetVisualIdFromActorType((ActorTypesEnum)i);
+                actor.VisualId = Utils.GetVisualIdFromActorType((ActorTypesEnum)i);
                 activeActorEntityList.Add(actor);
                 actorCount[i]++;
             }
@@ -51,8 +52,9 @@ public class Server_ActorSpawner
         // Despawn
         for (int i = 0; i < activeActorEntityList.Count; i++)
         {
-            if ((activeActorEntityList[i].transform.position - trackedPlayer.position).sqrMagnitude > 900f) // 30m
+            if ((activeActorEntityList[i].transform.position - trackedPlayer.position).sqrMagnitude > 225f) // 15m
             {
+                actorCount[(int)activeActorEntityList[i].actorType]--;
                 ObjectPoolManager.DestroyPooled(activeActorEntityList[i].gameObject);
                 activeActorEntityList.RemoveAt(i);
                 activeActorEntityList.TrimExcess();
@@ -62,26 +64,7 @@ public class Server_ActorSpawner
 
     public Server_ActorEntity GetClosestInteractibleActorToPos(Vector3 pos)
     {
+        activeActorEntityList = activeActorEntityList.OrderBy(x => Vector3.Distance(pos, x.transform.position)).ToList();
         return activeActorEntityList[0];
-    }
-
-    // Maybe align both enums to automate.
-    private VisualPrefabName GetVisualIdFromActorType(ActorTypesEnum actorType)
-    {
-        VisualPrefabName visualId = VisualPrefabName.NULL;
-        switch (actorType)
-        {
-            case ActorTypesEnum.Tree :
-                visualId = VisualPrefabName.SmallTree;
-                break;
-            case ActorTypesEnum.Ore :
-                visualId = VisualPrefabName.Ore;
-                break;
-            case ActorTypesEnum.FishBubbles :
-                visualId = VisualPrefabName.Fish;
-                break;
-        }
-
-        return visualId;
     }
 }

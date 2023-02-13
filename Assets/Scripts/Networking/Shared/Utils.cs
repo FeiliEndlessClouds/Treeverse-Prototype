@@ -18,6 +18,25 @@ public static class Utils
 	{
 		return (Mathf.Clamp(value, from1, to1) - from1) / (to1 - from1) * (to2 - from2) + from2;
 	}
+	
+	public static VisualPrefabName GetVisualIdFromActorType(ActorTypesEnum actorType)
+	{
+		VisualPrefabName visualId = VisualPrefabName.NULL;
+		switch (actorType)
+		{
+			case ActorTypesEnum.Tree :
+				visualId = VisualPrefabName.SmallTree;
+				break;
+			case ActorTypesEnum.Ore :
+				visualId = VisualPrefabName.Ore;
+				break;
+			case ActorTypesEnum.FishBubbles :
+				visualId = VisualPrefabName.Fish;
+				break;
+		}
+
+		return visualId;
+	}
 
 	public static T GetEnumerator<T>(this T enumerator) => enumerator;
 }

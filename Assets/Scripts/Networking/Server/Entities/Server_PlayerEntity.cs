@@ -49,10 +49,12 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         EndReliablePacket();
     }
     
-    public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany)
+    public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany, int networkId)
     {
+        Debug.Log("Send collect Resource");
+        
         BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany);
+        Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany, networkId);
         EndReliablePacket();
     }
 
@@ -150,14 +152,16 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                         if (serverActorEntity.actorType == ActorTypesEnum.Tree && serverActorEntity.VisualId == VisualPrefabName.SmallTree)
                         {
                             // Chop tree
+                            Cast(abilityArray[0]);
                             serverActorEntity.VisualId = VisualPrefabName.SmallTreeStump;
-                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3);
+                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3, serverActorEntity.NetworkId);
                             bCastPriorityAbility = true;
                         }
                         else if (serverActorEntity.actorType == ActorTypesEnum.Ore && serverActorEntity.VisualId == VisualPrefabName.Ore)
                         {
+                            Cast(abilityArray[0]);
                             serverActorEntity.VisualId = VisualPrefabName.OreMined;
-                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3);
+                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3, serverActorEntity.NetworkId);
                             bCastPriorityAbility = true;
                         }
                     }

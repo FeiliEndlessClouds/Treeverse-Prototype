@@ -42,4 +42,15 @@ public class GameManager_MMORPG : MonoBehaviour
         //     }
         // }
     }
+
+    public void UpdateVisual(VisualPrefabName visual, int networkId, float delay)
+    {
+        StartCoroutine(UpdateVisualC(visual, networkId, delay));
+    }
+
+    private IEnumerator UpdateVisualC(VisualPrefabName visual, int networkId, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        client_NetworkManager.GetEntityByNetworkID(networkId).UpdateVisual(visual);
+    }
 }

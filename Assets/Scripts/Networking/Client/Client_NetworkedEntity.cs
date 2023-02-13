@@ -160,6 +160,11 @@ public class Client_NetworkedEntity : MonoBehaviour, IEquatable<Client_Networked
         Interpolate(Time.deltaTime);
     }
 
+    public void UpdateVisual(VisualPrefabName visualId)
+    {
+        VisualRef = visualId;
+        UpdateVisual();
+    }
     public void UpdateVisual()
     {
         if (Visual != null)

@@ -6,7 +6,6 @@ public class Server_ActorEntity : Server_NetworkedEntity
     
     public override void Initialize()
     {
-        Debug.Log("2", gameObject);
         NetworkId = NetworkManager.NetworkedEntities.Allocate(this);
         IsDestroyed = false;
 
