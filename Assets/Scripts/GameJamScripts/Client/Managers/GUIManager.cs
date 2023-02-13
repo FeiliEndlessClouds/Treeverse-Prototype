@@ -8,8 +8,6 @@ using TMPro;
 public class GUIManager : MonoBehaviour
 {
     public Image redScreen;
-    public Slider hpSlider;
-    public Slider spSlider;
 
     public Sprite deathSprite;
 
@@ -48,16 +46,6 @@ public class GUIManager : MonoBehaviour
         }
         logoCG.alpha = 0f;
         logoCG.gameObject.SetActive(false);
-    }
-
-    public void SetHP(float value)
-    {
-	    hpSlider.value = value;
-    }
-
-    public void SetSP(float value)
-    {
-	    spSlider.value = value;
     }
 
     public void SetCDTimer(int whichAbility)

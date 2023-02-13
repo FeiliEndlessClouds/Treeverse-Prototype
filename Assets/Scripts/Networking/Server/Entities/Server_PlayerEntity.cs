@@ -42,10 +42,17 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         }
     }
 
-    public void SendRuleSetGameState(Server_RuleSet_MMORPG ruleSetManager)
+    public void SendGameState(Server_RuleSet_MMORPG ruleSetManager)
     {
         BeginReliablePacket();
         Server_RuleSetDataPacketProcessor.WriteToRuleSetData(ref ReliableBuffer, ruleSetManager);
+        EndReliablePacket();
+    }
+    
+    public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany)
+    {
+        BeginReliablePacket();
+        Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany);
         EndReliablePacket();
     }
 
@@ -127,15 +134,36 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                 if (localInputState == PlayerInputsStates.HOLD) pressedButtonTimer += Time.deltaTime;
                 else if (localInputState == PlayerInputsStates.NULL) pressedButtonTimer = 0f;
 
-                if (receivedInputState == PlayerInputsStates.RELEASE)
+                if (inputIdx != 0 && receivedInputState == PlayerInputsStates.RELEASE)
                 {
+                    Server_ActorEntity serverActorEntity = GetClosestInteractibleActor();
+
+                    bool bCastPriorityAbility = false;
+
                     if (inputIdx == 5)
                     {
                         CastMock();
+                        bCastPriorityAbility = true;
                     }
-                    else if (inputIdx != 0
-                             && abilityArray[inputIdx - 1].manaCost <= mp
-                             && Time.time >= abilityCoolDownArray[inputIdx - 1])
+                    else if (inputIdx == 1 && serverActorEntity != null)
+                    {
+                        if (serverActorEntity.actorType == ActorTypesEnum.Tree && serverActorEntity.VisualId == VisualPrefabName.SmallTree)
+                        {
+                            // Chop tree
+                            serverActorEntity.VisualId = VisualPrefabName.SmallTreeStump;
+                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3);
+                            bCastPriorityAbility = true;
+                        }
+                        else if (serverActorEntity.actorType == ActorTypesEnum.Ore && serverActorEntity.VisualId == VisualPrefabName.Ore)
+                        {
+                            serverActorEntity.VisualId = VisualPrefabName.OreMined;
+                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3);
+                            bCastPriorityAbility = true;
+                        }
+                    }
+                    
+                    if (!bCastPriorityAbility && abilityArray[inputIdx - 1].manaCost <= mp
+                                             && Time.time >= abilityCoolDownArray[inputIdx - 1])
                     {
                         abilityCoolDownArray[inputIdx - 1] = Time.time + abilityArray[inputIdx - 1].cooldown;
                         Cast(abilityArray[inputIdx - 1]);
@@ -154,6 +182,11 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         }
 
         base.UpdatePhysics(deltaTime);
+    }
+
+    private Server_ActorEntity GetClosestInteractibleActor()
+    {
+        return NetworkManager.RuleSetManagerMMorpg.actorSpawner.GetClosestInteractibleActorToPos(transform.position);
     }
 
     protected override void abilityInterruptByOuch()

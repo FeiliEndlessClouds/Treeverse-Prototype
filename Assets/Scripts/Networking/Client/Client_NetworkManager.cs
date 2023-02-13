@@ -333,10 +333,11 @@ public class Client_NetworkManager : MonoBehaviour
 			    case PacketType.Client_SetPlayerId:
 				    Client_SetPlayerIdPacketProcessor.Process(ref buffer, this);
 				    break;
-				case PacketType.Server_RuleSetData:
-				{
-					Server_RuleSetDataPacketProcessor.ProcessRuleSetData(ref buffer, NetworkPlayerId);
-				}
+			    case PacketType.Server_RuleSetData:
+				    Server_RuleSetDataPacketProcessor.ProcessRuleSetData(ref buffer, NetworkPlayerId);
+				    break;
+				case PacketType.Server_CollectResources:
+					Server_RuleSetDataPacketProcessor.ProcessCollectResources(ref buffer, NetworkPlayerId);
 					break;
                 default:
 				    buffer.Clear();

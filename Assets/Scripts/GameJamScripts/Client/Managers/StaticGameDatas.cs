@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum VisualPrefabName
 {
@@ -80,36 +81,6 @@ public enum AnimatorNodeNamesEnum
     BarAbility2,
     BarAbility3,
 
-    // -- RANGER    -- //
-    RanAttack = 20,
-    RanAbility1,
-    RanAbility2,
-    RanAbility3,
-
-    // -- PALADIN   -- //
-    PalAttack = 30,
-    PalAbility1,
-    PalAbility2,
-    PalAbility3,
-
-    // -- ASSASSIN  -- //
-    AssAttack = 40,
-    AssAbility1,
-    AssAbility2,
-    AssAbility3,
-    
-    // -- SORCERER  -- //
-    SorAttack = 50,
-    SorAbility1,
-    SorAbility2,
-    SorAbility3,
-
-    // -- RANGER    -- //
-    RgrAttack = 60,
-    RgrAbility1,
-    RgrAbility2,
-    RgrAbility3,
-
     Ouch = 100,
     Death,
     Stun,
@@ -125,4 +96,9 @@ public class StaticGameDatas : MonoBehaviour
     public GameObject[] allVisualPrefabs;
 
     [HideInInspector] public float[] abilityCDTimers;
+
+    private void Awake()
+    {
+        abilityCDTimers = new float[3];
+    }
 }

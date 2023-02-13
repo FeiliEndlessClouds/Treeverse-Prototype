@@ -61,15 +61,6 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
                 case (AnimatorNodeNamesEnum.BarAbility3): abilityIdx = 0; break;
                 case (AnimatorNodeNamesEnum.BarAbility1): abilityIdx = 1; break;
                 case (AnimatorNodeNamesEnum.BarAbility2): abilityIdx = 2; break;
-                case (AnimatorNodeNamesEnum.RgrAbility1): abilityIdx = 0; break;
-                case (AnimatorNodeNamesEnum.RgrAbility2): abilityIdx = 1; break;
-                case (AnimatorNodeNamesEnum.RgrAbility3): abilityIdx = 2; break;
-                case (AnimatorNodeNamesEnum.PalAbility2): abilityIdx = 0; break;
-                case (AnimatorNodeNamesEnum.PalAbility3): abilityIdx = 1; break;
-                case (AnimatorNodeNamesEnum.PalAbility1): abilityIdx = 2; break;
-                case (AnimatorNodeNamesEnum.AssAbility3): abilityIdx = 0; break;
-                case (AnimatorNodeNamesEnum.AssAbility2): abilityIdx = 1; break;
-                case (AnimatorNodeNamesEnum.AssAbility1): abilityIdx = 2; break;
             }
 
             if (abilityIdx != -1)
@@ -86,15 +77,6 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
             case (AnimatorNodeNamesEnum.BarAbility3): sound = Sounds.Bar1; break;
             case (AnimatorNodeNamesEnum.BarAbility1): sound = Sounds.Bar2; break;
             case (AnimatorNodeNamesEnum.BarAbility2): sound = Sounds.Bar3; break;
-            case (AnimatorNodeNamesEnum.RgrAbility1): sound = Sounds.Ran1; break;
-            case (AnimatorNodeNamesEnum.RgrAbility2): sound = Sounds.Ran2; break;
-            case (AnimatorNodeNamesEnum.RgrAbility3): sound = Sounds.Ran3; break;
-            case (AnimatorNodeNamesEnum.PalAbility2): sound = Sounds.Pal1; break;
-            case (AnimatorNodeNamesEnum.PalAbility3): sound = Sounds.Pal2; break;
-            case (AnimatorNodeNamesEnum.PalAbility1): sound = Sounds.Pal3; break;
-            case (AnimatorNodeNamesEnum.AssAbility3): sound = Sounds.Ass1; break;
-            case (AnimatorNodeNamesEnum.AssAbility2): sound = Sounds.Ass2; break;
-            case (AnimatorNodeNamesEnum.AssAbility1): sound = Sounds.Ass3; break;
         }
         
         if (sound != Sounds.NULL)
@@ -170,18 +152,6 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
 
         switch (to)
         {
-            case AnimatorNodeNamesEnum.AssAbility1:
-                t = 0.3f;
-                break;
-            case AnimatorNodeNamesEnum.AssAbility2:
-                t = 0.25f;
-                break;
-            case AnimatorNodeNamesEnum.AssAbility3:
-                t = 0.1f;
-                break;
-            case AnimatorNodeNamesEnum.AssAttack:
-                t = 0.2f;
-                break;
             case AnimatorNodeNamesEnum.BarAbility1:
                 t = 0.35f;
                 break;
@@ -193,30 +163,6 @@ public class Client_CharacterEntityVisual : Client_NetworkedEntityVisual
                 break;
             case AnimatorNodeNamesEnum.BarAttack:
                 t = 0.2f;
-                break;
-            case AnimatorNodeNamesEnum.PalAbility1:
-                t = 0.3f;
-                break;
-            case AnimatorNodeNamesEnum.PalAbility2:
-                t = 0.05f;
-                break;
-            case AnimatorNodeNamesEnum.PalAbility3:
-                t = 0.15f;
-                break;
-            case AnimatorNodeNamesEnum.PalAttack:
-                t = 0.1f;
-                break;
-            case AnimatorNodeNamesEnum.RgrAbility1:
-                t = 0.1f;
-                break;
-            case AnimatorNodeNamesEnum.RgrAbility2:
-                t = 0.1f;
-                break;
-            case AnimatorNodeNamesEnum.RgrAbility3:
-                t = 0.1f;
-                break;
-            case AnimatorNodeNamesEnum.RgrAttack:
-                t = 0.1f;
                 break;
         }
         // if ((int)from >= (int)AnimatorNodeNamesEnum.BrbnAttack1 && (int)to <= (int)AnimatorNodeNamesEnum.BrbnAttack3)

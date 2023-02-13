@@ -71,26 +71,21 @@ MonoBehaviour:
   bIsInvincible: 0
   bInPlantingArea: 0
   Velocity: {x: 0, y: 0, z: 0}
-  defaultAttributes: {fileID: 11400000, guid: 476f38a83bc1ee14e8b55bbf00587843, type: 2}
-  maxHp: 100
-  hp: 10
+  defaultAttributes: {fileID: 11400000, guid: 71c45ce5caaa91d42be466028cece0d3, type: 2}
+  maxHp: 500
+  hp: 500
   maxMp: 100
-  mp: 10
+  mp: 100
   armor: 20
   moveSpeed: 6
   mpGen: 0.5
   SpeedMultiplier: 1
   OnHitEffectDirection: {x: 0, y: 0, z: 0}
-  playerClass: 0
-  team: 0
-  throwSeedAbility: {fileID: 0}
   abilityArray:
-  - {fileID: 11400000, guid: 0fe22c2e59b36e44b88cd2e189137d2b, type: 2}
-  Statistics_DamageDealt: 0
-  Statistics_DamageMitigated: 0
-  Statistics_Healed: 0
-  Statistics_Death: 0
-  Statistics_Revived: 0
+  - {fileID: 11400000, guid: 268727c408ace4c95a9d84a4249b478c, type: 2}
+  - {fileID: 11400000, guid: 7d40a944c4b1c400a97609fd6d495f79, type: 2}
+  - {fileID: 11400000, guid: 327089663a8de4054869882ff8a343dc, type: 2}
+  - {fileID: 11400000, guid: 394ab4f33da40473f8ad12919a9023e4, type: 2}
   pressedButtonTimer: 0
 --- !u!143 &1341296647675441790
 CharacterController:

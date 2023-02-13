@@ -18,16 +18,20 @@ public class Server_RuleSet_MMORPG : MonoBehaviour
     public GameStatesEnum gameState;
     private GameStatesEnum previousGameState;
     
-    private Server_NetworkManager _serverNetworkManager;
+    public Server_NetworkManager serverNetworkManager;
     private List<Server_PlayerEntity> playerList = new List<Server_PlayerEntity>();
     private int playerCount;
 
-    private Server_ActorSpawner actorSpawner;
+    public GameObject actorPrefab;        // Corresponds with ActorTypesEnum
+    public Server_ActorSpawner actorSpawner;
     private List<int[]> actorsCount;
 
     public void Initialize(Server_NetworkManager nm)
     {
-        _serverNetworkManager = nm;
+        actorSpawner = new Server_ActorSpawner();
+        actorSpawner.Init(this);
+        actorsCount = new List<int[]>();
+        serverNetworkManager = nm;
         StartCoroutine(FSM());
     }
     
@@ -89,7 +93,7 @@ public class Server_RuleSet_MMORPG : MonoBehaviour
             return;
      
         for (int i = 0; i < playerList.Count; i++)
-            playerList[i].SendRuleSetGameState(this);
+            playerList[i].SendGameState(this);
     }
 
     private IEnumerator ROAMING()
@@ -99,7 +103,7 @@ public class Server_RuleSet_MMORPG : MonoBehaviour
             // Stream actors (collectible ground objects) with "structured randomness" around exploring players.
             for (int i = 0; i < playerList.Count; i++)
             {
-                actorSpawner.PopulateAroundPlayer(playerList[i].transform, actorsCount[i]);
+                actorSpawner.PopulateAroundPlayer(playerList[i].transform, actorsCount[i], actorPrefab);
             }
             
             yield return null;

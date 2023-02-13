@@ -9,4 +9,5 @@ public enum PacketType: int
     /* Client Packets */
     Client_SetPlayerId,
     Server_RuleSetData,
+    Server_CollectResources,
 }
