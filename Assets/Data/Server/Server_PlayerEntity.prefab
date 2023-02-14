@@ -86,6 +86,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d40a944c4b1c400a97609fd6d495f79, type: 2}
   - {fileID: 11400000, guid: 327089663a8de4054869882ff8a343dc, type: 2}
   - {fileID: 11400000, guid: 394ab4f33da40473f8ad12919a9023e4, type: 2}
+  ChopTreeAbility: {fileID: 11400000, guid: 7c998b42338444287b0ede6f9e3c76aa, type: 2}
+  MineOreAbility: {fileID: 11400000, guid: 29fe7f03cb5414646be3131f3beed830, type: 2}
   pressedButtonTimer: 0
 --- !u!143 &1341296647675441790
 CharacterController:

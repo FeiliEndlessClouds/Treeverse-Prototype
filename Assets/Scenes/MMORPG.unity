@@ -875,6 +875,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4115080174421392048, guid: ce2cd8a5a56c344578b8a28b95dbfb15, type: 3}
+      propertyPath: bAutoGathering
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115080174421392048, guid: ce2cd8a5a56c344578b8a28b95dbfb15, type: 3}
       propertyPath: serverNetworkManager
       value: 
       objectReference: {fileID: 1148906916}

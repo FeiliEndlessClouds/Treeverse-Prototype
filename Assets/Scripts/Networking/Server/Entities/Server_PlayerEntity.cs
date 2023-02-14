@@ -9,8 +9,14 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 {
     public Peer Peer;
 
+    public bool bAutoGathering;
+    private float autoGatherTick;
+
     [Header("Abilities must be assigned in order")]
     public GameplayAbility[] abilityArray;
+
+    public GameplayAbility ChopTreeAbility;
+    public GameplayAbility MineOreAbility;
 
     private float[] abilityCoolDownArray = new float[6];
 
@@ -48,13 +54,15 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         Server_RuleSetDataPacketProcessor.WriteToRuleSetData(ref ReliableBuffer, ruleSetManager);
         EndReliablePacket();
     }
-    
-    public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany, int networkId)
+
+    public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany,
+        int networkId)
     {
         Debug.Log("Send collect Resource");
-        
+
         BeginReliablePacket();
-        Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany, networkId);
+        Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany,
+            networkId);
         EndReliablePacket();
     }
 
@@ -63,7 +71,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         base.Initialize();
 
         BeginReliablePacket();
-        
+
         Client_SetPlayerIdPacketProcessor.WriteTo(ref ReliableBuffer, this);
 
         EndReliablePacket();
@@ -73,7 +81,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
     {
         if (ReliableBuffer.IsValid)
         {
-            NetworkManager.SendReliablePacket(ref ReliableBuffer, Peer);            
+            NetworkManager.SendReliablePacket(ref ReliableBuffer, Peer);
         }
     }
 
@@ -100,14 +108,59 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
         armor = defaultAttributes.armor;
         moveSpeed = defaultAttributes.moveSpeed;
         SpeedMultiplier = 1f;
-        
+
         bInPlantingArea = false;
     }
 
-    public override void UpdatePhysics(float deltaTime)
+    private bool GatherResource(Server_ActorEntity serverActorEntity)
+    {
+        if (serverActorEntity != null)
+        {
+            if (serverActorEntity.actorType == ActorTypesEnum.Tree &&
+                serverActorEntity.VisualId == VisualPrefabName.SmallTree)
+            {
+                transform.LookAt(serverActorEntity.transform.position);
+                serverActorEntity.bDead = true;
+                Cast(ChopTreeAbility);
+                serverActorEntity.VisualId = VisualPrefabName.SmallTreeStump;
+                SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3,
+                    serverActorEntity.NetworkId);
+                return true;
+            }
+            else if (serverActorEntity.actorType == ActorTypesEnum.Ore &&
+                     serverActorEntity.VisualId == VisualPrefabName.Ore)
+            {
+                transform.LookAt(serverActorEntity.transform.position);
+                serverActorEntity.bDead = true;
+                Cast(MineOreAbility);
+                serverActorEntity.VisualId = VisualPrefabName.OreMined;
+                SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3,
+                    serverActorEntity.NetworkId);
+                return true;
+            }
+        }
+        return false;
+    }
+
+public override void UpdatePhysics(float deltaTime)
     {
         if (Controller.isGrounded && !IsDead)
         {
+            if (bAutoGathering)
+            {
+                if (Execution == null && autoGatherTick < 0f && NormalizedMovementInput.sqrMagnitude == 0)
+                {
+                    autoGatherTick = 0.5f;
+                    if (GatherResource(GetClosestInteractibleActor()))
+                    {
+                        autoGatherTick = 1.5f;
+                        return;
+                    }
+                }
+                else
+                    autoGatherTick -= Time.deltaTime;
+            }
+            
             if (!(receivedInputState == PlayerInputsStates.PRESS && localInputState == PlayerInputsStates.HOLD ||
                 receivedInputState == PlayerInputsStates.RELEASE && localInputState == PlayerInputsStates.NULL))
             {
@@ -147,23 +200,9 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                         CastMock();
                         bCastPriorityAbility = true;
                     }
-                    else if (inputIdx == 1 && serverActorEntity != null)
+                    else if (bAutoGathering && inputIdx == 1 && serverActorEntity != null)
                     {
-                        if (serverActorEntity.actorType == ActorTypesEnum.Tree && serverActorEntity.VisualId == VisualPrefabName.SmallTree)
-                        {
-                            // Chop tree
-                            Cast(abilityArray[0]);
-                            serverActorEntity.VisualId = VisualPrefabName.SmallTreeStump;
-                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3, serverActorEntity.NetworkId);
-                            bCastPriorityAbility = true;
-                        }
-                        else if (serverActorEntity.actorType == ActorTypesEnum.Ore && serverActorEntity.VisualId == VisualPrefabName.Ore)
-                        {
-                            Cast(abilityArray[0]);
-                            serverActorEntity.VisualId = VisualPrefabName.OreMined;
-                            SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3, serverActorEntity.NetworkId);
-                            bCastPriorityAbility = true;
-                        }
+                        bCastPriorityAbility = GatherResource(serverActorEntity);
                     }
                     
                     if (!bCastPriorityAbility && abilityArray[inputIdx - 1].manaCost <= mp

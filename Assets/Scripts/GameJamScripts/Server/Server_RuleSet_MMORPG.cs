@@ -14,6 +14,7 @@ public enum GameStatesEnum
 public class Server_RuleSet_MMORPG : MonoBehaviour
 {
     public bool bActive;
+    public bool bAutoGathering;
 
     public GameStatesEnum gameState;
     private GameStatesEnum previousGameState;
@@ -44,6 +45,7 @@ public class Server_RuleSet_MMORPG : MonoBehaviour
     private void Server_NetworkManager_OnPlayerConnected(Server_PlayerEntity player)
     {
         playerCount++;
+        player.bAutoGathering = bAutoGathering;
         playerList.Add(player);
         actorsCount.Add(new int[(int)CollectiblesEnum.COUNT]);
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Server_ActorEntity : Server_NetworkedEntity
 {
     public ActorTypesEnum actorType = ActorTypesEnum.NULL;
+    public bool bDead;
     
     public override void Initialize()
     {
@@ -16,6 +17,6 @@ public class Server_ActorEntity : Server_NetworkedEntity
     
     public void Reset()
     {
-        Debug.Log("Reset actor");
+        bDead = false;
     }
 }

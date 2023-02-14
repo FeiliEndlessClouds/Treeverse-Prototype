@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using UnityEditor;
-using UnityEditor.Search;
 using UnityEngine;
 
 // When adding a new ActorType, add its matching visualNameId at the bottom of this script
@@ -36,23 +33,28 @@ public class Server_ActorSpawner
         // Spawn
         for (int i = 0; i < actorCount.Length; i++)
         {
-            if (actorCount[i] < 10)
+            if ((ActorTypesEnum)i != ActorTypesEnum.FishBubbles)
             {
-                Server_ActorEntity actor = ObjectPoolManager.CreatePooled(actorPrefab,
-                    trackedPlayer.position + new Vector3(Random.Range(-10, 10), 0f, Random.Range(-10, 10)),
-                    Quaternion.identity).GetComponent<Server_ActorEntity>();
-                actor.NetworkManager = ruleSetManager.serverNetworkManager;
-                actor.actorType = (ActorTypesEnum)i;
-                actor.VisualId = Utils.GetVisualIdFromActorType((ActorTypesEnum)i);
-                activeActorEntityList.Add(actor);
-                actorCount[i]++;
+                if (actorCount[i] < 30)
+                {
+                    Vector2 randomPoint = Random.insideUnitCircle * 30f;
+                    if (randomPoint.magnitude < 10f) randomPoint = randomPoint.normalized * Random.Range(10f, 30f);
+                    Server_ActorEntity actor = ObjectPoolManager.CreatePooled(actorPrefab,
+                            trackedPlayer.position + new Vector3(randomPoint.x, 0f, randomPoint.y), Quaternion.identity)
+                        .GetComponent<Server_ActorEntity>();
+                    actor.NetworkManager = ruleSetManager.serverNetworkManager;
+                    actor.actorType = (ActorTypesEnum)i;
+                    actor.VisualId = Utils.GetVisualIdFromActorType((ActorTypesEnum)i);
+                    activeActorEntityList.Add(actor);
+                    actorCount[i]++;
+                }
             }
         }
         
         // Despawn
         for (int i = 0; i < activeActorEntityList.Count; i++)
         {
-            if ((activeActorEntityList[i].transform.position - trackedPlayer.position).sqrMagnitude > 225f) // 15m
+            if ((activeActorEntityList[i].transform.position - trackedPlayer.position).sqrMagnitude > 1225f) // 15m
             {
                 actorCount[(int)activeActorEntityList[i].actorType]--;
                 ObjectPoolManager.DestroyPooled(activeActorEntityList[i].gameObject);
@@ -65,6 +67,13 @@ public class Server_ActorSpawner
     public Server_ActorEntity GetClosestInteractibleActorToPos(Vector3 pos)
     {
         activeActorEntityList = activeActorEntityList.OrderBy(x => Vector3.Distance(pos, x.transform.position)).ToList();
-        return activeActorEntityList[0];
+        for (int i = 0; i < activeActorEntityList.Count; i++)
+        {
+            if ((activeActorEntityList[i].transform.position - pos).sqrMagnitude < 10f && !activeActorEntityList[i].bDead)
+            {
+                return activeActorEntityList[i];
+            }
+        }
+        return null;
     }
 }
