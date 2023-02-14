@@ -32,6 +32,8 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 
     public float pressedButtonTimer = 0f;
 
+    public Server_InventoryManager inventory = new Server_InventoryManager();
+
     public void BeginReliablePacket()
     {
         if (!ReliableBuffer.IsValid)
@@ -58,8 +60,6 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
     public void SendCollectResource(Server_RuleSet_MMORPG ruleSetManager, CollectiblesEnum resource, int howMany,
         int networkId)
     {
-        Debug.Log("Send collect Resource");
-
         BeginReliablePacket();
         Server_RuleSetDataPacketProcessor.WriteToCollectResources(ref ReliableBuffer, ruleSetManager, resource, howMany,
             networkId);
@@ -69,11 +69,11 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
     public override void Initialize()
     {
         base.Initialize();
-
+        
+        ResetAttributes();
+        
         BeginReliablePacket();
-
         Client_SetPlayerIdPacketProcessor.WriteTo(ref ReliableBuffer, this);
-
         EndReliablePacket();
     }
 
@@ -103,6 +103,8 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
 
     public void ResetAttributes()
     {
+        inventory.Init();
+        
         maxHp = hp = defaultAttributes.maxHp;
         maxMp = mp = defaultAttributes.maxMp;
         armor = defaultAttributes.armor;
@@ -123,8 +125,7 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                 serverActorEntity.bDead = true;
                 Cast(ChopTreeAbility);
                 serverActorEntity.VisualId = VisualPrefabName.SmallTreeStump;
-                SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Wood, 3,
-                    serverActorEntity.NetworkId);
+                AddToInventory(CollectiblesEnum.Wood, 3, serverActorEntity.NetworkId);
                 return true;
             }
             else if (serverActorEntity.actorType == ActorTypesEnum.Ore &&
@@ -134,12 +135,17 @@ public unsafe class Server_PlayerEntity : Server_CreatureEntity, IEquatable<Serv
                 serverActorEntity.bDead = true;
                 Cast(MineOreAbility);
                 serverActorEntity.VisualId = VisualPrefabName.OreMined;
-                SendCollectResource(NetworkManager.RuleSetManagerMMorpg, CollectiblesEnum.Ore, 3,
-                    serverActorEntity.NetworkId);
+                AddToInventory(CollectiblesEnum.Ore, 3, serverActorEntity.NetworkId);
                 return true;
             }
         }
         return false;
+    }
+
+    private void AddToInventory(CollectiblesEnum item, int howMany, int actorEntityNetId)
+    {
+        inventory.AddToInventory(item, howMany);
+        SendCollectResource(NetworkManager.RuleSetManagerMMorpg, item, howMany, actorEntityNetId);
     }
 
 public override void UpdatePhysics(float deltaTime)

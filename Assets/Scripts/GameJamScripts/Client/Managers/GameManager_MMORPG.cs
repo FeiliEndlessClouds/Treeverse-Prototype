@@ -51,6 +51,13 @@ public class GameManager_MMORPG : MonoBehaviour
     private IEnumerator UpdateVisualC(VisualPrefabName visual, int networkId, float delay)
     {
         yield return new WaitForSeconds(delay);
-        client_NetworkManager.GetEntityByNetworkID(networkId).UpdateVisual(visual);
+        Client_NetworkedEntity player = client_NetworkManager.GetEntityByNetworkID(networkId);
+        SpawnVFX(VFXEnum.PixelHit, player.transform.position, Quaternion.identity);
+        player.UpdateVisual(visual);
+    }
+    
+    public GameObject SpawnVFX(VFXEnum vfxName, Vector3 pos, Quaternion rot)
+    {
+        return ObjectPoolManager.CreatePooled(GameInfos.Instance.staticGameData.fxGoArray[(int)vfxName], pos, rot);
     }
 }

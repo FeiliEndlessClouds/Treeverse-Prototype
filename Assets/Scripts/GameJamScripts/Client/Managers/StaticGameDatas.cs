@@ -26,6 +26,7 @@ public enum CollectiblesEnum
 
 public enum VFXEnum
 {
+    PixelHit,
 	Emoji_Confused,
     Emoji_Freeze,
     Emoji_GameStart,
